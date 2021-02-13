@@ -23,16 +23,16 @@ grpc_tools_node_protoc \
     --grpc_out=grpc_js:userService/proto \
     --proto_path=./protos/user ./protos/user/*.proto
 
-python3 -m grpc_tools.protoc \
-    --python_out=./projectService/proto \
-    --grpc_python_out=./projectService/proto \
-    --proto_path=./protos/project ./protos/project/*.proto
+#python3 -m grpc_tools.protoc \
+#    --python_out=./projectService/proto \
+#    --grpc_python_out=./projectService/proto \
+#    --proto_path=./protos/project ./protos/project/*.proto
 
-grpc_tools_ruby_protoc \
-    --proto_path=./protos \
-    --ruby_out=./taskService/proto \
-    --grpc_out=./taskService/proto \
-    ./protos/task/*.proto ./protos/user/*.proto ./protos/project/*.proto
+#grpc_tools_ruby_protoc \
+#    --proto_path=./protos \
+#    --ruby_out=./taskService/proto \
+#    --grpc_out=./taskService/proto \
+#    ./protos/task/*.proto ./protos/user/*.proto ./protos/project/*.proto
 
 protoc  --go_out=./notificationService/proto --go_opt=paths=source_relative\
     --go-grpc_out=./notificationService/proto --go-grpc_opt=paths=source_relative\
@@ -47,21 +47,21 @@ protoc  --go_out=./notificationService/proto --go_opt=paths=source_relative\
 
 # Fix python import
 # https://github.com/protocolbuffers/protobuf/issues/1491
-pushd projectService/proto
-sed -i -E 's/^import.*_pb2/from . \0/' *.py
-popd
+#pushd projectService/proto
+#sed -i -E 's/^import.*_pb2/from . \0/' *.py
+#popd
 
 # Generate requirements.txt for python project
-pushd projectService
-pipenv lock -r > requirements.txt
-popd
+#pushd projectService
+#pipenv lock -r > requirements.txt
+#popd
 
 
 packs=(
     "api"
     "user"
-    "project"
-    "task"
+#    "project"
+#    "task"
     "gmailapi"
     "igapi"
     "uibackend"
