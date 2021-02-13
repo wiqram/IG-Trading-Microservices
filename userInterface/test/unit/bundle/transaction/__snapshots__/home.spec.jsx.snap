@@ -1,0 +1,713 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`TransactionHome Snapshot Test renders correctly with all props given error 1`] = `
+<div>
+  <div
+    className="styles__Row-sc-1ldttm7-2 style__CardRow-sc-11hxntw-4 UfOYK"
+  >
+    <div
+      className="styles__Col-sc-1ldttm7-1 hwpCrd"
+    >
+      <a
+        href="/"
+        onClick={[Function]}
+      >
+        <button
+          className="styles__Button-sc-1ldttm7-3 styles__ButtonPrimary-sc-1ldttm7-4 jkYupd"
+        >
+           &lt; Back to Accounts
+        </button>
+         
+      </a>
+    </div>
+  </div>
+  <div
+    className="styles__Row-sc-1ldttm7-2 style__Card-sc-11hxntw-3 dqAIJi"
+  >
+    <div
+      className="styles__Row-sc-1ldttm7-2 style__FormRow-sc-11hxntw-5 edaJHc"
+    >
+      <div
+        className="styles__Col-sc-1ldttm7-1 hafUyu"
+      >
+        <div
+          className="style__Label-sc-11hxntw-6 kAhttz"
+          id="accountNameLabel"
+        >
+          Account Name
+        </div>
+      </div>
+      <div
+        className="styles__Col-sc-1ldttm7-1 hafUyu"
+      >
+        <div
+          className="style__ProductName-sc-11hxntw-7 fmSCGe"
+          id="accountNameValue"
+        >
+          Saving A/C
+        </div>
+      </div>
+    </div>
+    <div
+      className="styles__Row-sc-1ldttm7-2 style__FormRow-sc-11hxntw-5 edaJHc"
+    >
+      <div
+        className="styles__Col-sc-1ldttm7-1 hafUyu"
+      >
+        <div
+          className="style__Label-sc-11hxntw-6 kAhttz"
+          id="accountNumberLabel"
+        >
+          Account Number
+        </div>
+      </div>
+      <div
+        className="styles__Col-sc-1ldttm7-1 hafUyu"
+      >
+        <div
+          className="style__AccountNumber-sc-11hxntw-8 kfxDyN"
+          id="accountNumberValue"
+        >
+          111111
+        </div>
+      </div>
+    </div>
+    <div
+      className="styles__Row-sc-1ldttm7-2 style__FormRow-sc-11hxntw-5 edaJHc"
+    >
+      <div
+        className="styles__Col-sc-1ldttm7-1 hafUyu"
+      >
+        <div
+          className="style__Label-sc-11hxntw-6 kAhttz"
+          id="sortCodeLabel"
+        >
+          Sort Code
+        </div>
+      </div>
+      <div
+        className="styles__Col-sc-1ldttm7-1 hafUyu"
+      >
+        <div
+          className="style__AccountNumber-sc-11hxntw-8 kfxDyN"
+          id="sortCodeValue"
+        >
+          121212
+        </div>
+      </div>
+    </div>
+    <div
+      className="styles__Row-sc-1ldttm7-2 style__FormRow-sc-11hxntw-5 edaJHc"
+    >
+      <div
+        className="styles__Col-sc-1ldttm7-1 hafUyu"
+      >
+        <div
+          className="style__Label-sc-11hxntw-6 kAhttz"
+          id="currentBalanceLabel"
+        >
+          Current Balance
+        </div>
+      </div>
+      <div
+        className="styles__Col-sc-1ldttm7-1 hafUyu"
+      >
+        <div
+          className="currency__TextStyle-sc-1uazvwe-0 kMHNch"
+          id="currentBalanceValue"
+        >
+          £11.11
+        </div>
+      </div>
+    </div>
+    <div
+      className="styles__Row-sc-1ldttm7-2 style__FormRow-sc-11hxntw-5 edaJHc"
+    >
+      <div
+        className="styles__Col-sc-1ldttm7-1 hafUyu"
+      >
+        <div
+          className="style__Label-sc-11hxntw-6 kAhttz"
+          id="availableBalanceLabel"
+        >
+          Available Balance
+        </div>
+      </div>
+      <div
+        className="styles__Col-sc-1ldttm7-1 hafUyu"
+      >
+        <div
+          className="currency__TextStyle-sc-1uazvwe-0 kMHNch"
+          id="availableBalanceValue"
+        >
+          £1,212.12
+        </div>
+      </div>
+    </div>
+  </div>
+  <div
+    className="styles__Row-sc-1ldttm7-2 style__CardRow-sc-11hxntw-4 UfOYK"
+  >
+    <div
+      className="style__Label-sc-11hxntw-6 kAhttz"
+      id="infoText"
+    >
+      Click on tab to see your latest transaction
+    </div>
+  </div>
+  <div
+    className="styles__Row-sc-1ldttm7-2 style__CardRow-sc-11hxntw-4 UfOYK"
+  >
+    <div
+      className="styles__Col-sc-1ldttm7-1 hafUyu"
+    >
+      <button
+        className="styles__Button-sc-1ldttm7-3 style__TabButton-sc-11hxntw-9 cVEoZ"
+        id="ALL"
+        onClick={[Function]}
+        value="ALL"
+      >
+        ALL
+      </button>
+    </div>
+    <div
+      className="styles__Col-sc-1ldttm7-1 hafUyu"
+    >
+      <button
+        className="styles__Button-sc-1ldttm7-3 style__TabButton-sc-11hxntw-9 gPEHad"
+        id="IN"
+        onClick={[Function]}
+        value="IN"
+      >
+        IN
+      </button>
+    </div>
+    <div
+      className="styles__Col-sc-1ldttm7-1 hafUyu"
+    >
+      <button
+        className="styles__Button-sc-1ldttm7-3 style__TabButton-sc-11hxntw-9 gPEHad"
+        id="OUT"
+        onClick={[Function]}
+        value="OUT"
+      >
+        OUT
+      </button>
+    </div>
+  </div>
+  <div />
+</div>
+`;
+
+exports[`TransactionHome Snapshot Test renders correctly with all props given isLoading - false 1`] = `
+<div>
+  <div
+    className="styles__Row-sc-1ldttm7-2 style__CardRow-sc-11hxntw-4 UfOYK"
+  >
+    <div
+      className="styles__Col-sc-1ldttm7-1 hwpCrd"
+    >
+      <a
+        href="/"
+        onClick={[Function]}
+      >
+        <button
+          className="styles__Button-sc-1ldttm7-3 styles__ButtonPrimary-sc-1ldttm7-4 jkYupd"
+        >
+           &lt; Back to Accounts
+        </button>
+         
+      </a>
+    </div>
+  </div>
+  <div
+    className="styles__Row-sc-1ldttm7-2 style__Card-sc-11hxntw-3 dqAIJi"
+  >
+    <div
+      className="styles__Row-sc-1ldttm7-2 style__FormRow-sc-11hxntw-5 edaJHc"
+    >
+      <div
+        className="styles__Col-sc-1ldttm7-1 hafUyu"
+      >
+        <div
+          className="style__Label-sc-11hxntw-6 kAhttz"
+          id="accountNameLabel"
+        >
+          Account Name
+        </div>
+      </div>
+      <div
+        className="styles__Col-sc-1ldttm7-1 hafUyu"
+      >
+        <div
+          className="style__ProductName-sc-11hxntw-7 fmSCGe"
+          id="accountNameValue"
+        >
+          Saving A/C
+        </div>
+      </div>
+    </div>
+    <div
+      className="styles__Row-sc-1ldttm7-2 style__FormRow-sc-11hxntw-5 edaJHc"
+    >
+      <div
+        className="styles__Col-sc-1ldttm7-1 hafUyu"
+      >
+        <div
+          className="style__Label-sc-11hxntw-6 kAhttz"
+          id="accountNumberLabel"
+        >
+          Account Number
+        </div>
+      </div>
+      <div
+        className="styles__Col-sc-1ldttm7-1 hafUyu"
+      >
+        <div
+          className="style__AccountNumber-sc-11hxntw-8 kfxDyN"
+          id="accountNumberValue"
+        >
+          111111
+        </div>
+      </div>
+    </div>
+    <div
+      className="styles__Row-sc-1ldttm7-2 style__FormRow-sc-11hxntw-5 edaJHc"
+    >
+      <div
+        className="styles__Col-sc-1ldttm7-1 hafUyu"
+      >
+        <div
+          className="style__Label-sc-11hxntw-6 kAhttz"
+          id="sortCodeLabel"
+        >
+          Sort Code
+        </div>
+      </div>
+      <div
+        className="styles__Col-sc-1ldttm7-1 hafUyu"
+      >
+        <div
+          className="style__AccountNumber-sc-11hxntw-8 kfxDyN"
+          id="sortCodeValue"
+        >
+          121212
+        </div>
+      </div>
+    </div>
+    <div
+      className="styles__Row-sc-1ldttm7-2 style__FormRow-sc-11hxntw-5 edaJHc"
+    >
+      <div
+        className="styles__Col-sc-1ldttm7-1 hafUyu"
+      >
+        <div
+          className="style__Label-sc-11hxntw-6 kAhttz"
+          id="currentBalanceLabel"
+        >
+          Current Balance
+        </div>
+      </div>
+      <div
+        className="styles__Col-sc-1ldttm7-1 hafUyu"
+      >
+        <div
+          className="currency__TextStyle-sc-1uazvwe-0 kMHNch"
+          id="currentBalanceValue"
+        >
+          £11.11
+        </div>
+      </div>
+    </div>
+    <div
+      className="styles__Row-sc-1ldttm7-2 style__FormRow-sc-11hxntw-5 edaJHc"
+    >
+      <div
+        className="styles__Col-sc-1ldttm7-1 hafUyu"
+      >
+        <div
+          className="style__Label-sc-11hxntw-6 kAhttz"
+          id="availableBalanceLabel"
+        >
+          Available Balance
+        </div>
+      </div>
+      <div
+        className="styles__Col-sc-1ldttm7-1 hafUyu"
+      >
+        <div
+          className="currency__TextStyle-sc-1uazvwe-0 kMHNch"
+          id="availableBalanceValue"
+        >
+          £1,212.12
+        </div>
+      </div>
+    </div>
+  </div>
+  <div
+    className="styles__Row-sc-1ldttm7-2 style__CardRow-sc-11hxntw-4 UfOYK"
+  >
+    <div
+      className="style__Label-sc-11hxntw-6 kAhttz"
+      id="infoText"
+    >
+      Click on tab to see your latest transaction
+    </div>
+  </div>
+  <div
+    className="styles__Row-sc-1ldttm7-2 style__CardRow-sc-11hxntw-4 UfOYK"
+  >
+    <div
+      className="styles__Col-sc-1ldttm7-1 hafUyu"
+    >
+      <button
+        className="styles__Button-sc-1ldttm7-3 style__TabButton-sc-11hxntw-9 cVEoZ"
+        id="ALL"
+        onClick={[Function]}
+        value="ALL"
+      >
+        ALL
+      </button>
+    </div>
+    <div
+      className="styles__Col-sc-1ldttm7-1 hafUyu"
+    >
+      <button
+        className="styles__Button-sc-1ldttm7-3 style__TabButton-sc-11hxntw-9 gPEHad"
+        id="IN"
+        onClick={[Function]}
+        value="IN"
+      >
+        IN
+      </button>
+    </div>
+    <div
+      className="styles__Col-sc-1ldttm7-1 hafUyu"
+    >
+      <button
+        className="styles__Button-sc-1ldttm7-3 style__TabButton-sc-11hxntw-9 gPEHad"
+        id="OUT"
+        onClick={[Function]}
+        value="OUT"
+      >
+        OUT
+      </button>
+    </div>
+  </div>
+  <div>
+    <div>
+      <div
+        className="styles__Row-sc-1ldttm7-2 style__TRow-sc-11hxntw-2 hDTTUB"
+        color="white"
+      >
+        <div
+          className="styles__Col-sc-1ldttm7-1 hafUyu"
+        >
+          <div
+            className="style__DateLabel-sc-11hxntw-1 bHDeAu"
+          >
+            01-01-2019
+          </div>
+        </div>
+      </div>
+      <div
+        className="styles__Row-sc-1ldttm7-2 style__TRow-sc-11hxntw-2 bOWGLX"
+      >
+        <div
+          className="styles__Col-sc-1ldttm7-1 bTiKQz"
+        >
+          <div
+            className="style__OtherLabel-sc-11hxntw-0 jiEETm"
+          >
+            ASDA Shopping
+          </div>
+        </div>
+        <div
+          className="styles__Col-sc-1ldttm7-1 hafUyu"
+        >
+          <div
+            className="style__OtherLabel-sc-11hxntw-0 jiEETm"
+          >
+            CR
+          </div>
+        </div>
+        <div
+          className="styles__Col-sc-1ldttm7-1 fEbdWm"
+        >
+          <div
+            className="style__OtherLabel-sc-11hxntw-0 jiEETm"
+          >
+            <div
+              className="currency__TextStyle-sc-1uazvwe-0 kMHNch"
+              type="CR"
+            >
+              £10,010.20
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div>
+      <div
+        className="styles__Row-sc-1ldttm7-2 style__TRow-sc-11hxntw-2 hDTTUB"
+        color="white"
+      >
+        <div
+          className="styles__Col-sc-1ldttm7-1 hafUyu"
+        >
+          <div
+            className="style__DateLabel-sc-11hxntw-1 bHDeAu"
+          >
+            02-01-2019
+          </div>
+        </div>
+      </div>
+      <div
+        className="styles__Row-sc-1ldttm7-2 style__TRow-sc-11hxntw-2 bOWGLX"
+      >
+        <div
+          className="styles__Col-sc-1ldttm7-1 bTiKQz"
+        >
+          <div
+            className="style__OtherLabel-sc-11hxntw-0 jiEETm"
+          >
+            MORRISON Shopping
+          </div>
+        </div>
+        <div
+          className="styles__Col-sc-1ldttm7-1 hafUyu"
+        >
+          <div
+            className="style__OtherLabel-sc-11hxntw-0 jiEETm"
+          >
+            DR
+          </div>
+        </div>
+        <div
+          className="styles__Col-sc-1ldttm7-1 fEbdWm"
+        >
+          <div
+            className="style__OtherLabel-sc-11hxntw-0 jiEETm"
+          >
+            <div
+              className="currency__TextStyle-sc-1uazvwe-0 gWoNzp"
+              type="DR"
+            >
+              £10,020.20
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+`;
+
+exports[`TransactionHome Snapshot Test renders correctly with all props given isLoading - true 1`] = `
+<div>
+  <div
+    className="styles__Row-sc-1ldttm7-2 style__CardRow-sc-11hxntw-4 UfOYK"
+  >
+    <div
+      className="styles__Col-sc-1ldttm7-1 hwpCrd"
+    >
+      <a
+        href="/"
+        onClick={[Function]}
+      >
+        <button
+          className="styles__Button-sc-1ldttm7-3 styles__ButtonPrimary-sc-1ldttm7-4 jkYupd"
+        >
+           &lt; Back to Accounts
+        </button>
+         
+      </a>
+    </div>
+  </div>
+  <div
+    className="styles__Row-sc-1ldttm7-2 style__Card-sc-11hxntw-3 dqAIJi"
+  >
+    <div
+      className="styles__Row-sc-1ldttm7-2 style__FormRow-sc-11hxntw-5 edaJHc"
+    >
+      <div
+        className="styles__Col-sc-1ldttm7-1 hafUyu"
+      >
+        <div
+          className="style__Label-sc-11hxntw-6 kAhttz"
+          id="accountNameLabel"
+        >
+          Account Name
+        </div>
+      </div>
+      <div
+        className="styles__Col-sc-1ldttm7-1 hafUyu"
+      >
+        <div
+          className="style__ProductName-sc-11hxntw-7 fmSCGe"
+          id="accountNameValue"
+        >
+          Saving A/C
+        </div>
+      </div>
+    </div>
+    <div
+      className="styles__Row-sc-1ldttm7-2 style__FormRow-sc-11hxntw-5 edaJHc"
+    >
+      <div
+        className="styles__Col-sc-1ldttm7-1 hafUyu"
+      >
+        <div
+          className="style__Label-sc-11hxntw-6 kAhttz"
+          id="accountNumberLabel"
+        >
+          Account Number
+        </div>
+      </div>
+      <div
+        className="styles__Col-sc-1ldttm7-1 hafUyu"
+      >
+        <div
+          className="style__AccountNumber-sc-11hxntw-8 kfxDyN"
+          id="accountNumberValue"
+        >
+          111111
+        </div>
+      </div>
+    </div>
+    <div
+      className="styles__Row-sc-1ldttm7-2 style__FormRow-sc-11hxntw-5 edaJHc"
+    >
+      <div
+        className="styles__Col-sc-1ldttm7-1 hafUyu"
+      >
+        <div
+          className="style__Label-sc-11hxntw-6 kAhttz"
+          id="sortCodeLabel"
+        >
+          Sort Code
+        </div>
+      </div>
+      <div
+        className="styles__Col-sc-1ldttm7-1 hafUyu"
+      >
+        <div
+          className="style__AccountNumber-sc-11hxntw-8 kfxDyN"
+          id="sortCodeValue"
+        >
+          121212
+        </div>
+      </div>
+    </div>
+    <div
+      className="styles__Row-sc-1ldttm7-2 style__FormRow-sc-11hxntw-5 edaJHc"
+    >
+      <div
+        className="styles__Col-sc-1ldttm7-1 hafUyu"
+      >
+        <div
+          className="style__Label-sc-11hxntw-6 kAhttz"
+          id="currentBalanceLabel"
+        >
+          Current Balance
+        </div>
+      </div>
+      <div
+        className="styles__Col-sc-1ldttm7-1 hafUyu"
+      >
+        <div
+          className="currency__TextStyle-sc-1uazvwe-0 kMHNch"
+          id="currentBalanceValue"
+        >
+          £11.11
+        </div>
+      </div>
+    </div>
+    <div
+      className="styles__Row-sc-1ldttm7-2 style__FormRow-sc-11hxntw-5 edaJHc"
+    >
+      <div
+        className="styles__Col-sc-1ldttm7-1 hafUyu"
+      >
+        <div
+          className="style__Label-sc-11hxntw-6 kAhttz"
+          id="availableBalanceLabel"
+        >
+          Available Balance
+        </div>
+      </div>
+      <div
+        className="styles__Col-sc-1ldttm7-1 hafUyu"
+      >
+        <div
+          className="currency__TextStyle-sc-1uazvwe-0 kMHNch"
+          id="availableBalanceValue"
+        >
+          £1,212.12
+        </div>
+      </div>
+    </div>
+  </div>
+  <div
+    className="styles__Row-sc-1ldttm7-2 style__CardRow-sc-11hxntw-4 UfOYK"
+  >
+    <div
+      className="style__Label-sc-11hxntw-6 kAhttz"
+      id="infoText"
+    >
+      Click on tab to see your latest transaction
+    </div>
+  </div>
+  <div
+    className="styles__Row-sc-1ldttm7-2 style__CardRow-sc-11hxntw-4 UfOYK"
+  >
+    <div
+      className="styles__Col-sc-1ldttm7-1 hafUyu"
+    >
+      <button
+        className="styles__Button-sc-1ldttm7-3 style__TabButton-sc-11hxntw-9 cVEoZ"
+        id="ALL"
+        onClick={[Function]}
+        value="ALL"
+      >
+        ALL
+      </button>
+    </div>
+    <div
+      className="styles__Col-sc-1ldttm7-1 hafUyu"
+    >
+      <button
+        className="styles__Button-sc-1ldttm7-3 style__TabButton-sc-11hxntw-9 gPEHad"
+        id="IN"
+        onClick={[Function]}
+        value="IN"
+      >
+        IN
+      </button>
+    </div>
+    <div
+      className="styles__Col-sc-1ldttm7-1 hafUyu"
+    >
+      <button
+        className="styles__Button-sc-1ldttm7-3 style__TabButton-sc-11hxntw-9 gPEHad"
+        id="OUT"
+        onClick={[Function]}
+        value="OUT"
+      >
+        OUT
+      </button>
+    </div>
+  </div>
+  <div
+    className="styles__Row-sc-1ldttm7-2 iMcGKE"
+  >
+    <div
+      className="styles__Col-sc-1ldttm7-1 eeaKic"
+    >
+      <b>
+        Loading...
+      </b>
+    </div>
+  </div>
+</div>
+`;

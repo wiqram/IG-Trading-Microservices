@@ -1,0 +1,19 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`CurrencyConverter Snapshot Test renders correctly with all props given -> $ 1`] = `
+<div
+  className="currency__TextStyle-sc-1uazvwe-0 gWoNzp"
+  type="DR"
+>
+  $1,212.22
+</div>
+`;
+
+exports[`CurrencyConverter Snapshot Test renders correctly with all props given -> £ 1`] = `
+<div
+  className="currency__TextStyle-sc-1uazvwe-0 kMHNch"
+  type="CR"
+>
+  $1,212.22
+</div>
+`;

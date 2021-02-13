@@ -1,0 +1,1267 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "protos/api/api.proto",
+    "version": "version not set"
+  },
+  "tags": [
+    {
+      "name": "API"
+    }
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "paths": {
+    "/v1/igapi/clientsentiment/{marketId}": {
+      "get": {
+        "summary": "GetClientSentiment retrieves all products",
+        "operationId": "API_GetClientSentiment",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/gmailapiClientSentimentResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "marketId",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "tags": [
+          "API"
+        ]
+      }
+    },
+    "/v1/igapi/getconfirmationdetails/{dealRef}": {
+      "get": {
+        "summary": "GetConfirmationDetails retrieves all products",
+        "operationId": "API_GetConfirmationDetails",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/gmailapiConfirmationResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "dealRef",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "tags": [
+          "API"
+        ]
+      }
+    },
+    "/v1/igapi/lightstreamersubscribe/{marketId}": {
+      "get": {
+        "summary": "OpenLightStreamerSubscription retrieves all products",
+        "operationId": "API_OpenLightStreamerSubscription",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/gmailapiLightStreamerSubResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "marketId",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "tags": [
+          "API"
+        ]
+      }
+    },
+    "/v1/igapi/positions/otc": {
+      "post": {
+        "summary": "openOTCOrder opens a trade over the counter on specific epic",
+        "operationId": "API_OpenOTCOrder",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/gmailapiOTCOrderResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/gmailapiOTCOrderRequest"
+            }
+          }
+        ],
+        "tags": [
+          "API"
+        ]
+      }
+    },
+    "/v1/igapi/testAccountTextRazor/{apiKey}/{text}": {
+      "get": {
+        "summary": "TestAccountTextRazor set a trade on IG Broker based on action from email",
+        "operationId": "API_TestAccountTextRazor",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/demo_igapiTextRazorResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "apiKey",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "text",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "tags": [
+          "API"
+        ]
+      }
+    },
+    "/v1/igapi/testAnalysisTextRazor/{apiKey}/{text}": {
+      "get": {
+        "summary": "TestAnalysisTextRazor set a trade on IG Broker based on action from email",
+        "operationId": "API_TestAnalysisTextRazor",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/demo_igapiTextRazorResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "apiKey",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "text",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "tags": [
+          "API"
+        ]
+      }
+    },
+    "/v1/igapi/testClassifierTextRazor/{apiKey}/{text}": {
+      "get": {
+        "summary": "TestClassifierTextRazor set a trade on IG Broker based on action from email",
+        "operationId": "API_TestClassifierTextRazor",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/demo_igapiTextRazorResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "apiKey",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "text",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "tags": [
+          "API"
+        ]
+      }
+    },
+    "/v1/igapi/testDictionaryTextRazor/{apiKey}/{text}": {
+      "get": {
+        "summary": "TestDictionaryTextRazor set a trade on IG Broker based on action from email",
+        "operationId": "API_TestDictionaryTextRazor",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/demo_igapiTextRazorResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "apiKey",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "text",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "tags": [
+          "API"
+        ]
+      }
+    },
+    "/v1/igapi/trade": {
+      "post": {
+        "summary": "TradeAction set a trade on IG Broker based on action from email",
+        "operationId": "API_TradeAction",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/demo_igapiTradeResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/demo_igapiOpenTradeRequest"
+            }
+          }
+        ],
+        "tags": [
+          "API"
+        ]
+      }
+    },
+    "/v1/notificationservice/subscribe": {
+      "post": {
+        "summary": "SubscribeToMail call gmailapi subscribe",
+        "operationId": "API_SubscribeToMail",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/gmailapiSubscriptionResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/gmailapiSubscriptionRequest"
+            }
+          }
+        ],
+        "tags": [
+          "API"
+        ]
+      }
+    },
+    "/v1/project/create": {
+      "post": {
+        "summary": "CreateProject creates project",
+        "operationId": "API_CreateProject",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/demo_projectProjectResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/demo_projectCreateProjectRequest"
+            }
+          }
+        ],
+        "tags": [
+          "API"
+        ]
+      }
+    },
+    "/v1/project/get/{projectId}": {
+      "get": {
+        "summary": "GetProject retrives a project",
+        "operationId": "API_GetProject",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/demo_projectProjectResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "projectId",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "userId",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          }
+        ],
+        "tags": [
+          "API"
+        ]
+      }
+    },
+    "/v1/project/{projectId}/task/list": {
+      "get": {
+        "summary": "ListTasks lists task",
+        "operationId": "API_ListTasks2",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/demo_taskListTasksResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "projectId",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "tagId",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "assignedUserId",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          }
+        ],
+        "tags": [
+          "API"
+        ]
+      }
+    },
+    "/v1/project/{projectId}/task/list/{assignedUserId}": {
+      "get": {
+        "summary": "ListTasks lists task",
+        "operationId": "API_ListTasks3",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/demo_taskListTasksResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "projectId",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "assignedUserId",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "tagId",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          }
+        ],
+        "tags": [
+          "API"
+        ]
+      }
+    },
+    "/v1/project/{projectId}/task/list/{assignedUserId}/{tagId}": {
+      "get": {
+        "summary": "ListTasks lists task",
+        "operationId": "API_ListTasks",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/demo_taskListTasksResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "projectId",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "assignedUserId",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "tagId",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "tags": [
+          "API"
+        ]
+      }
+    },
+    "/v1/task/create": {
+      "post": {
+        "summary": "CreateTask creates task",
+        "operationId": "API_CreateTask",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/demo_taskTaskResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/demo_taskCreateTaskRequest"
+            }
+          }
+        ],
+        "tags": [
+          "API"
+        ]
+      }
+    },
+    "/v1/task/update": {
+      "post": {
+        "summary": "UpdateTask updates task",
+        "operationId": "API_UpdateTask",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/demo_taskTaskResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/demo_taskUpdateTaskRequest"
+            }
+          }
+        ],
+        "tags": [
+          "API"
+        ]
+      }
+    },
+    "/v1/uibackend/getproducts": {
+      "get": {
+        "summary": "GetProducts retrieves all products",
+        "operationId": "API_GetProducts",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/demo_uibackendProductsResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "tags": [
+          "API"
+        ]
+      }
+    },
+    "/v1/uibackend/gettransactions/{productId}/{filterBy}": {
+      "get": {
+        "summary": "GetTransactions retrieves all products",
+        "operationId": "API_GetTransactions",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/demo_uibackendTransactionsResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "productId",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "filterBy",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "tags": [
+          "API"
+        ]
+      }
+    },
+    "/v1/user/login": {
+      "post": {
+        "summary": "LoginUser logs in user",
+        "operationId": "API_LoginUser",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/demo_userUserResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/demo_userLoginRequest"
+            }
+          }
+        ],
+        "tags": [
+          "API"
+        ]
+      }
+    },
+    "/v1/user/register": {
+      "post": {
+        "summary": "RegisterUser creates user",
+        "operationId": "API_RegisterUser",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/demo_userUserResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/demo_userRegisterRequest"
+            }
+          }
+        ],
+        "tags": [
+          "API"
+        ]
+      }
+    }
+  },
+  "definitions": {
+    "demo_igapiOpenTradeRequest": {
+      "type": "object",
+      "properties": {
+        "userId": {
+          "type": "string"
+        },
+        "epic": {
+          "type": "string"
+        },
+        "buy": {
+          "type": "boolean"
+        }
+      },
+      "title": "The request containing any user identifier, the instrument to deal on and direction of trade, buy long or sell short"
+    },
+    "demo_igapiTextRazorResponse": {
+      "type": "object",
+      "title": "The request containing any user identifier, the instrument to deal on and direction of trade, buy long or sell short"
+    },
+    "demo_igapiTradeResponse": {
+      "type": "object",
+      "properties": {
+        "transactionId": {
+          "type": "string"
+        },
+        "tradePrice": {
+          "type": "integer",
+          "format": "int32"
+        }
+      },
+      "title": "response containing transId and price at which the trade was executed"
+    },
+    "demo_projectCreateProjectRequest": {
+      "type": "object",
+      "properties": {
+        "userId": {
+          "type": "string"
+        },
+        "name": {
+          "type": "string"
+        }
+      }
+    },
+    "demo_projectProjectResponse": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string"
+        },
+        "name": {
+          "type": "string"
+        },
+        "tags": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/demo_projectTagResponse"
+          }
+        }
+      }
+    },
+    "demo_projectTagResponse": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string"
+        },
+        "name": {
+          "type": "string"
+        },
+        "projectId": {
+          "type": "string"
+        }
+      }
+    },
+    "demo_taskCreateTaskRequest": {
+      "type": "object",
+      "properties": {
+        "userId": {
+          "type": "string"
+        },
+        "name": {
+          "type": "string"
+        },
+        "projectId": {
+          "type": "string"
+        },
+        "tagId": {
+          "type": "string"
+        },
+        "assignedUserId": {
+          "type": "string"
+        }
+      }
+    },
+    "demo_taskListTasksResponse": {
+      "type": "object",
+      "properties": {
+        "tasks": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/demo_taskTaskResponse"
+          }
+        }
+      }
+    },
+    "demo_taskTaskResponse": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string"
+        },
+        "userId": {
+          "type": "string"
+        },
+        "name": {
+          "type": "string"
+        },
+        "projectId": {
+          "type": "string"
+        },
+        "tagId": {
+          "type": "string"
+        },
+        "assignedUserId": {
+          "type": "string"
+        },
+        "project": {
+          "$ref": "#/definitions/demo_projectProjectResponse"
+        },
+        "tag": {
+          "$ref": "#/definitions/demo_projectTagResponse"
+        },
+        "assignedUser": {
+          "$ref": "#/definitions/demo_userVerifyResponse"
+        }
+      }
+    },
+    "demo_taskUpdateTaskRequest": {
+      "type": "object",
+      "properties": {
+        "userId": {
+          "type": "string"
+        },
+        "taskId": {
+          "type": "string"
+        },
+        "tagId": {
+          "type": "string"
+        },
+        "assignedUserId": {
+          "type": "string"
+        }
+      }
+    },
+    "demo_uibackendProduct": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "productId": {
+          "type": "string"
+        },
+        "productName": {
+          "type": "string"
+        },
+        "sortCode": {
+          "type": "string"
+        },
+        "accountNumber": {
+          "type": "string"
+        },
+        "currentBalance": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "availableBalance": {
+          "type": "integer",
+          "format": "int32"
+        }
+      }
+    },
+    "demo_uibackendProductsResponse": {
+      "type": "object",
+      "properties": {
+        "products": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/demo_uibackendProduct"
+          }
+        }
+      }
+    },
+    "demo_uibackendTransaction": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "productId": {
+          "type": "string"
+        },
+        "dateOn": {
+          "type": "string"
+        },
+        "debitCredit": {
+          "type": "string"
+        },
+        "transDescription": {
+          "type": "string"
+        },
+        "details": {
+          "type": "string"
+        },
+        "amount": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "transactionList": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/demo_uibackendTransactionList"
+          }
+        }
+      }
+    },
+    "demo_uibackendTransactionList": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "productId": {
+          "type": "string"
+        },
+        "dateOn": {
+          "type": "string"
+        },
+        "debitCredit": {
+          "type": "string"
+        },
+        "transDescription": {
+          "type": "string"
+        },
+        "details": {
+          "type": "string"
+        },
+        "amount": {
+          "type": "integer",
+          "format": "int32"
+        }
+      }
+    },
+    "demo_uibackendTransactionsResponse": {
+      "type": "object",
+      "properties": {
+        "transactions": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/demo_uibackendTransaction"
+          }
+        }
+      }
+    },
+    "demo_userLoginRequest": {
+      "type": "object",
+      "properties": {
+        "email": {
+          "type": "string"
+        },
+        "password": {
+          "type": "string"
+        }
+      }
+    },
+    "demo_userRegisterRequest": {
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string"
+        },
+        "email": {
+          "type": "string"
+        },
+        "password": {
+          "type": "string"
+        }
+      }
+    },
+    "demo_userUserResponse": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string"
+        },
+        "name": {
+          "type": "string"
+        },
+        "email": {
+          "type": "string"
+        },
+        "token": {
+          "type": "string"
+        }
+      }
+    },
+    "demo_userVerifyResponse": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string"
+        },
+        "name": {
+          "type": "string"
+        },
+        "email": {
+          "type": "string"
+        }
+      }
+    },
+    "gmailapiClientSentimentResponse": {
+      "type": "object",
+      "properties": {
+        "longPositionPercentage": {
+          "type": "number",
+          "format": "float"
+        },
+        "shortPositionPercentage": {
+          "type": "number",
+          "format": "float"
+        }
+      },
+      "title": "ClientSentimentResponse - Response for client sentiment"
+    },
+    "gmailapiConfirmationResponse": {
+      "type": "object",
+      "properties": {
+        "dealStatus": {
+          "type": "string"
+        },
+        "profit": {
+          "type": "number",
+          "format": "float"
+        },
+        "profitCurrency": {
+          "type": "string"
+        },
+        "status": {
+          "type": "string"
+        },
+        "reason": {
+          "type": "string"
+        },
+        "level": {
+          "type": "number",
+          "format": "float"
+        }
+      },
+      "title": "OTCDealConfirmation - Deal confirmation"
+    },
+    "gmailapiLightStreamerSubResponse": {
+      "type": "object",
+      "properties": {
+        "marketId": {
+          "type": "string"
+        },
+        "time": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "bid": {
+          "type": "number",
+          "format": "float"
+        },
+        "ask": {
+          "type": "number",
+          "format": "float"
+        }
+      },
+      "title": "LightStreamerSubResponse - Response for client sentiment"
+    },
+    "gmailapiOTCOrderRequest": {
+      "type": "object",
+      "properties": {
+        "epic": {
+          "type": "string"
+        },
+        "level": {
+          "type": "string"
+        },
+        "forceOpen": {
+          "type": "boolean"
+        },
+        "orderType": {
+          "type": "string"
+        },
+        "currencyCode": {
+          "type": "string"
+        },
+        "direction": {
+          "type": "string"
+        },
+        "expiry": {
+          "type": "string"
+        },
+        "size": {
+          "type": "number",
+          "format": "float"
+        },
+        "stopDistance": {
+          "type": "string"
+        },
+        "stopLevel": {
+          "type": "string"
+        },
+        "limitDistance": {
+          "type": "string"
+        },
+        "limitLevel": {
+          "type": "string"
+        },
+        "quoteId": {
+          "type": "string"
+        },
+        "timeInForce": {
+          "type": "string"
+        },
+        "trailingStop": {
+          "type": "boolean"
+        },
+        "trailingStopIncrement": {
+          "type": "string"
+        },
+        "guaranteedStop": {
+          "type": "boolean"
+        },
+        "dealReference": {
+          "type": "string"
+        }
+      },
+      "title": "OTCOrderRequest - request struct for placing orders"
+    },
+    "gmailapiOTCOrderResponse": {
+      "type": "object",
+      "properties": {
+        "dealRef": {
+          "type": "string"
+        }
+      }
+    },
+    "gmailapiSubscriptionRequest": {
+      "type": "object",
+      "properties": {
+        "emailId": {
+          "type": "string"
+        },
+        "labelName": {
+          "type": "string"
+        },
+        "topicName": {
+          "type": "string"
+        },
+        "duration": {
+          "type": "integer",
+          "format": "int32"
+        }
+      },
+      "title": "The request containing any user identifier, the labelname to monitor and the topicname to subscribe to"
+    },
+    "gmailapiSubscriptionResponse": {
+      "type": "object",
+      "properties": {
+        "transactionId": {
+          "type": "string"
+        },
+        "historyId": {
+          "type": "string"
+        }
+      },
+      "title": "response containing transId and historyid of gmail watch response"
+    },
+    "protobufAny": {
+      "type": "object",
+      "properties": {
+        "typeUrl": {
+          "type": "string"
+        },
+        "value": {
+          "type": "string",
+          "format": "byte"
+        }
+      }
+    },
+    "rpcStatus": {
+      "type": "object",
+      "properties": {
+        "code": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "message": {
+          "type": "string"
+        },
+        "details": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/protobufAny"
+          }
+        }
+      }
+    }
+  }
+}

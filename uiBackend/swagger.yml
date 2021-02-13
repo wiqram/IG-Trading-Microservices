@@ -1,0 +1,121 @@
+---
+openapi: 3.0.0
+info:
+  description: Digital Bank APIs
+  version: "1.0.0"
+  title: Digital Bank APIs
+servers:
+  - url: http://127.0.0.1:3070/
+    description: Dev Environment
+tags:
+  - name: Products
+    description: Products Endpoints
+  - name: Transactions
+    description: Transactions Endpoints
+paths:
+  /products:
+    get:
+      summary: All Products Information
+      tags: [Products]
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/products'
+        '422':
+          description: Not found
+
+  /transactions/{productId}:
+    get:
+      summary: All Transactions Details
+      tags: [Transactions]
+      parameters:
+        - in: path
+          name: productId
+          required: true
+          schema:
+            type: string  
+        - in: query
+          name: filterBy
+          required: true
+          schema:
+            type: string   
+            example: "ALL | CR | DR"           
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/tansactions'
+        '422':
+          description: Not found
+
+
+components:
+  schemas:
+    products:
+      type: "array"
+      items:
+        type: "object"
+        properties:
+          id:
+            type: "number"
+            example: "1"
+          productId:
+            type: "string"
+            example: "SA001"
+          productName:
+            type: "string"
+            example: "SAVING A/C" 
+          sortCode:
+            type: "string"
+            example: "11-22-11" 
+          accountNumber:
+            type: "string"
+            example: "012345671" 
+          currentBalance:
+            type: "number"
+            example: "12.12"
+          availableBalance:
+            type: "number"
+            example: "12.12" 
+    tansactions:
+      type: "array"
+      items:
+        type: "object"
+        properties:
+          id:
+            type: "number"
+            example: "1"
+          dateOn:
+            type: "string"
+            example: "11-11-2019"
+          tansactionsList:
+            type: "array"
+            items:
+              type: "object"
+              properties:
+                id:
+                  type: "number"
+                  example: "1"
+                productId:
+                  type: "string"
+                  example: "SA001"
+                dateOn:
+                  type: "string"
+                  example: "11-11-2019" 
+                debitCredit:
+                  type: "string"
+                  example: "DR" 
+                transDescription:
+                  type: "string"
+                  example: "MORRISON Shopping" 
+                details:
+                  type: "string"
+                  example: "Trans at MORRISON Livingston"
+                amount:
+                  type: "number"
+                  example: "12.12"

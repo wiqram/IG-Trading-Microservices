@@ -1,0 +1,207 @@
+version: '3.8'
+
+services:
+    user:
+        build:
+            context: ./userService
+        image: microservice/demo/user
+        restart: "no"
+        environment:
+            - DB_URI=mongodb://mongo:27017/
+            - DB_NAME=Microservice-demo-user
+        ports:
+            - 8080:50051
+        depends_on:
+            - mongo
+
+#    userinterface:
+#        build:
+#            context: ./userInterface
+#        image: microservice/demo/userinterface
+#        restart: "no"
+#        environment:
+#            NODE_ENV: development
+#            CHOKIDAR_USEPOLLING: 'true'
+#        ports:
+#            - 8092:8092
+#        depends_on:
+#            - uibackend
+#        volumes:
+#            -  ./userInterface/src:/app/src
+#            -  /app/node_modules
+
+    reactuserinterface:
+        build:
+            context: ./reactUserInterface
+        image: microservice/demo/reactuserinterface
+        restart: "no"
+        environment:
+            NODE_ENV: development
+        ports:
+            - 3003:3003
+        depends_on:
+            -   uibackend
+        volumes:
+            - ./reactUserInterface/src:/app/src
+            - /app/node_modules
+
+#    reactui:
+#        build:
+#            context: ./reactUi
+#        image: microservice/demo/reactui
+#        restart: "no"
+#        environment:
+#            NODE_ENV: development
+#        ports:
+#            - 3001:3001
+#        depends_on:
+#            - materialuibackend
+#        volumes:
+#            - ./reactUserInterface/src:/app/src
+#            - /app/node_modules
+
+    postgresql:
+        image: postgres
+        restart: "no"
+        ports:
+            - 5432:5432
+        environment:
+            POSTGRES_DB: microservice-task
+            POSTGRES_USER: postgres
+            POSTGRES_PASSWORD: password
+        volumes:
+            - postgresdb:/var/lib/postgresql/data/
+
+    mysql:
+        image: mysql:5.7
+        restart: "no"
+        environment:
+            MYSQL_DATABASE: microservice-project
+            MYSQL_ROOT_PASSWORD: password
+        ports:
+            - 3306:3306
+        volumes:
+            - mysqldb:/var/lib/mysql
+            - ./uiBackend/db_data/setup.sql:/docker-entrypoint-initdb.d/setup.sql
+            - ./notificationService/db_data/setupSignalDB.sql:/docker-entrypoint-initdb.d/setupSignalDB.sql
+
+    mongo:
+        image: mongo
+        restart: "no"
+        environment:
+            MONGO_INITDB_DATABASE: Microservice-demo-user
+        ports:
+            - 27017:27017
+        volumes:
+            - mongodb:/data/db
+            - mongodb_config:/data/configdb
+
+    notificationservice:
+        build:
+            context: ./notificationService
+        image: microservice/demo/notificationservice
+        restart: "no"
+        environment:
+            - DB_URI=mongodb://notificationcluster.lovai.mongodb.net
+            - DB_NAME=notifications
+            - SQL_DB_URI=mysql+mysqldb://root:zOJSvEEFc5@mysql:3306/product
+        ports:
+            - 8084:50054
+        volumes:
+            - mongodb:/data/db
+            - mongodb_config:/data/configdb
+            - ./notificationService/src:/go/github.com/wiqram/IG-Trading-Microservices/notificationService/src
+            - /go/github.com/wiqram/IG-Trading-Microservices/notificationService/vendor
+        depends_on:
+            - mongo
+
+    igapi:
+        build:
+            context: ./igapi
+        image: microservice/demo/igapi
+        restart: "no"
+        environment:
+            MONGO_INITDB_DATABASE: Microservice-demo-user
+        ports:
+            - 8087:50055
+        volumes:
+            - /home/vik/.m2/:/root/.m2/
+            - mongodb_config:/data/configdb
+            - mongodb:/data/db
+        depends_on:
+            - mongo
+
+    uibackend:
+        build:
+            context: ./uiBackend
+        image: microservice/demo/uibackend
+        restart: "no"
+        environment:
+            - DB_URI=mysql+mysqldb://root:password@mysql:3306/products
+        ports:
+            - 3070:3070
+        depends_on:
+            - mysql
+
+#    materialuibackend:
+#        build:
+#            context: ./materialUiBackend
+#        image: microservice/demo/materialuibackend
+#        restart: "no"
+#        command: sh -c "npm install -g knex && npm run-script knex migrate:latest && npm start"
+#        environment:
+#            - DATABASE_URL=postgres://postgres:password@postgresql:5432/microservice-task
+#            - DATABASE_HOST=postgresql
+#            - DATABASE_PORT=5432
+#            - DATABASE_NAME=microservice-task
+#            - DATABASE_USER=postgres
+#            - DATABASE_PASSWORD=password
+#        ports:
+#            - 3073:3073
+#        depends_on:
+#            - postgresql
+#            - redis
+
+    api:
+        build:
+            context: ./apiService
+        image: microservice/demo/api
+        restart: "no"
+        environment:
+            - USER_ADDRESS=user:50051
+            - PROJECT_ADDRESS=project:50052
+            - TASK_ADDRESS=task:50053
+            - NOTIFICATIONSERVICE_ADDRESS=notificationservice:50054
+            - IGAPI_ADDRESS=igapi:50055
+            - USERINTERFACE_ADDRESS=userinterface:8092
+            - UIBACKEND_ADDRESS=uibackend:3070
+        ports:
+            - 8083:50059
+        command: serve
+        depends_on:
+            - user
+            - notificationservice
+
+    api-gateway:
+        image: microservice/demo/api
+        restart: "no"
+        environment:
+            - HOST=api
+            - PORT=50059
+            - PROXY_PORT=9090
+        ports:
+            - 9090:9090
+        command: proxy
+        depends_on:
+            - api
+
+
+    redis:
+        image: redis:alpine
+        ports:
+            - 6379:6379
+volumes:
+    postgresdb:
+    mysqldb:
+    mongodb:
+    mongodb_config:

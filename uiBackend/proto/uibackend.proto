@@ -1,0 +1,54 @@
+syntax = "proto3";
+
+package demo_uibackend;
+
+option go_package = "github.com/wiqram/IG-Trading-Microservices/protos/uibackend";
+
+service UibackendSvc {
+    rpc getProducts (ProductsRequest) returns (ProductsResponse);
+    rpc getTransactions (TransactionsRequest) returns (TransactionsResponse);
+}
+message ProductsRequest {}
+
+message ProductsResponse {
+    repeated Product products = 1;
+}
+message Product {
+    int32 id = 1;
+    string productId = 2;
+    string productName = 3;
+    string sortCode = 4;
+    string accountNumber = 5;
+    int32 currentBalance = 6;
+    int32 availableBalance = 7;
+}
+
+message TransactionsRequest {
+    string productId = 1;
+    string filterBy = 2;
+}
+
+message TransactionsResponse {
+    repeated Transaction transactions = 1;
+}
+
+message Transaction {
+    int32 id = 1;
+    string productId = 2;
+    string dateOn = 3;
+    string debitCredit = 4;
+    string transDescription = 5;
+    string details = 6;
+    int32 amount = 7;
+    repeated TransactionList transactionList = 8;
+}
+
+message TransactionList {
+    int32 id = 1;
+    string productId = 2;
+    string dateOn = 3;
+    string debitCredit = 4;
+    string transDescription = 5;
+    string details = 6;
+    int32 amount = 7;
+}

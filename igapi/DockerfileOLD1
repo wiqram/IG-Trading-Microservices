@@ -1,0 +1,78 @@
+# Install maven and copy project for compilation
+FROM maven:latest as builder
+RUN mkdir -p /app/ig-webapi-java-client/lib/
+#COPY ./.m2 /root/.m2
+
+#ADD gwr $HOME
+RUN apt-get update; \
+    apt-get install -y --no-install-recommends apt-utils; \
+    apt-get install -y wget unzip curl maven git; \
+    echo \
+    "<settings xmlns='http://maven.apache.org/SETTINGS/1.0.0\' \
+    xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance' \
+    xsi:schemaLocation='http://maven.apache.org/SETTINGS/1.0.0 https://maven.apache.org/xsd/settings-1.0.0.xsd'> \
+        <localRepository>/home/vik/.m2/repository</localRepository> \
+        <interactiveMode>true</interactiveMode> \
+        <usePluginRegistry>false</usePluginRegistry> \
+        <offline>false</offline> \
+    </settings>" \
+    > /usr/share/maven/conf/settings.xml; \
+    mkdir /root/.m2/; \
+    echo \
+    "<settings xmlns='http://maven.apache.org/SETTINGS/1.0.0\' \
+    xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance' \
+    xsi:schemaLocation='http://maven.apache.org/SETTINGS/1.0.0 https://maven.apache.org/xsd/settings-1.0.0.xsd'> \
+        <localRepository>/root/.m2/repository</localRepository> \
+        <interactiveMode>true</interactiveMode> \
+        <usePluginRegistry>false</usePluginRegistry> \
+        <offline>false</offline> \
+    </settings>" \
+    > /root/.m2/settings.xml
+
+
+WORKDIR /igapi
+#COPY /ig-webapi-java-client/pom.xml /ig-webapi-java-client/
+#COPY /ig-webapi-java-client/lib/ls-client.6.0.2.20160510.jar /ig-webapi-java-client/lib/ls-client.6.0.2.20160510.jar
+#COPY /ig-webapi-java-client/lib/ls-client.6.0.2.20160510.jar /ig-webapi-java-client/lib/ls-client.6.0.2.20160510.jar
+#COPY /ig-webapi-java-client/lib/ls-client.6.0.2.20160510.jar ./lib/ls-client.6.0.2.20160510.jar
+COPY pom.xml .
+
+COPY /ig-webapi-java-client/pom.xml ./ig-webapi-java-client/
+
+RUN mvn verify clean --fail-never
+
+COPY /ig-webapi-java-client/lib/ls-client.6.0.2.20160510.jar ./ig-webapi-java-client/lib/
+RUN mvn dependency:go-offline
+RUN mvn clean package
+
+#
+# Package stage
+#
+# set base image (host OS)
+FROM java:8
+
+# set the working directory in the container
+WORKDIR /var/www/java
+
+#COPY --from=builder /usr/local/ig-webapi-java-sample-console/target/ig-webapi-java-sample-console-2.2.0-SNAPSHOT.jar /usr/app/ig-webapi-java-sample-console/target/ig-webapi-java-sample-console-2.2.0-SNAPSHOT.jar
+#COPY --from=builder /usr/local/ig-webapi-java-sample-console-ui/target/ig-webapi-java-sample-console-ui-2.2.0-SNAPSHOT.jar /usr/app/ig-webapi-java-sample-console-ui/target/ig-webapi-java-sample-console-ui-2.2.0-SNAPSHOT.jar
+COPY --from=builder /app/ig-webapi-java-client/target/ig-webapi-java-client-2.2.0-SNAPSHOT.jar /ig-webapi-java-client/target/ig-webapi-java-client-2.2.0-SNAPSHOT.jar
+COPY --from=builder /app/ig-webapi-java-client/target/ig-webapi-java-client-2.2.0-SNAPSHOT-jar-with-dependencies.jar /ig-webapi-java-client/target/ig-webapi-java-client-2.2.0-SNAPSHOT-jar-with-dependencies.jar
+COPY --from=builder /app/ig-webapi-java-client/lib/ls-client.6.0.2.20160510.jar /ig-webapi-java-client/lib/ls-client.6.0.2.20160510.jar
+#COPY --from=builder /usr/local/ .
+
+# copy the dependencies file to the working directory
+#COPY . /var/www/java
+
+# install dependencies
+#RUN pip install -r requirements.txt
+
+# copy the content of the local src directory to the working directory
+COPY . .
+
+# command to run on container start
+EXPOSE 50055
+#CMD ["java", "-jar", "-Dspring.profiles.active=default", "ig-webapi-java-client/target/ig-webapi-java-client-2.2.0-SNAPSHOT.jar"]
+CMD ["java", "-cp", "/ig-webapi-java-client/target/ig-webapi-java-client-2.2.0-SNAPSHOT-jar-with-dependencies.jar", "com.iggroup.webapi.samples.client.grpc.GrpcServer"]
+#ENTRYPOINT ["java", "-cp", "ig-webapi-java-client/target/ig-webapi-java-client-2.2.0-SNAPSHOT.jar", "com.iggroup.webapi.samples.client.grpc.App"]
+#CMD [ "java","-jar","ig-webapi-java-sample-console-ui/target/ig-webapi-java-sample-console-ui-2.2.0-SNAPSHOT.jar wiqramdemo DemoPWD123 d56147107609d1d2c1e65d8b54a011eff305441b" ]

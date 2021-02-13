@@ -1,0 +1,81 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`ProductCard Snapshot Test renders correctly with all props given 1`] = `
+Array [
+  <div
+    className="styles__Row-sc-1ldttm7-2 style__Card-sc-1rp0p1n-0 kkqgzJ"
+  >
+    <div
+      className="styles__Col-sc-1ldttm7-1 bTiKQz"
+    >
+      <div
+        className="styles__Row-sc-1ldttm7-2 style__CardRow-sc-1rp0p1n-2 hSSDTv"
+      >
+        <div
+          className="style__ProductName-sc-1rp0p1n-1 lgSegm"
+        >
+          Saving A/C
+        </div>
+        <div
+          className="style__AccountNumber-sc-1rp0p1n-3 ghNEoX"
+        >
+          111111/121212
+        </div>
+      </div>
+      <div
+        className="styles__Row-sc-1ldttm7-2 style__CardRow-sc-1rp0p1n-2 hSSDTv"
+      >
+        <div
+          className="style__Currency-sc-1rp0p1n-5 XQCQa"
+          size={36}
+        >
+          <div
+            className="currency__TextStyle-sc-1uazvwe-0 kMHNch"
+          >
+            £11.11
+          </div>
+        </div>
+        <div
+          className="style__BalanceLabel-sc-1rp0p1n-4 gFnvle"
+        >
+          Current Balance
+        </div>
+      </div>
+      <div
+        className="styles__Row-sc-1ldttm7-2 style__CardRow-sc-1rp0p1n-2 hSSDTv"
+      >
+        <div
+          className="style__Currency-sc-1rp0p1n-5 bqdoCa"
+          size={22}
+        >
+          <div
+            className="currency__TextStyle-sc-1uazvwe-0 kMHNch"
+          >
+            £1,212.12
+          </div>
+        </div>
+        <div
+          className="style__BalanceLabel-sc-1rp0p1n-4 gFnvle"
+        >
+          Available Balance
+        </div>
+      </div>
+    </div>
+    <div
+      className="styles__Col-sc-1ldttm7-1 style__NavItems-sc-1rp0p1n-6 bozNBC"
+    >
+      <a
+        href="/product/undefined"
+        onClick={[Function]}
+      >
+        <button
+          className="styles__Button-sc-1ldttm7-3 styles__ButtonPrimary-sc-1ldttm7-4 jkYupd"
+        >
+          More Details
+        </button>
+      </a>
+    </div>
+  </div>,
+  " ",
+]
+`;

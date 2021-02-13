@@ -1,0 +1,275 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+   <modelVersion>4.0.0</modelVersion>
+
+   <parent>
+      <groupId>com.iggroup.webapi.samples</groupId>
+      <artifactId>ig-webapi-java</artifactId>
+      <version>2.2.0-SNAPSHOT</version>
+   </parent>
+
+   <name>IG Web API Java Client</name>
+   <description>Sample client library for accessing the IG REST and Streaming APIs</description>
+
+   <artifactId>ig-webapi-java-client</artifactId>
+   <properties>
+
+      <!-- protobuf paths -->
+      <protobuf.input.directory>${project.basedir}/src/main/proto</protobuf.input.directory>
+      <protobuf.output.directory>${project.build.directory}/generated-sources</protobuf.output.directory>
+
+      <!-- library versions -->
+      <build-helper-maven-plugin.version>1.9.1</build-helper-maven-plugin.version>
+      <maven-antrun-plugin.version>1.8</maven-antrun-plugin.version>
+      <maven-dependency-plugin.version>2.10</maven-dependency-plugin.version>
+      <maven-shade-plugin.version>2.4.2</maven-shade-plugin.version>
+      <os-maven-plugin.version>1.4.1.Final</os-maven-plugin.version>
+      <protobuf.version>3.0.0-beta-1</protobuf.version>
+
+   </properties>
+   <dependencies>
+
+      <dependency>
+         <groupId>org.springframework</groupId>
+         <artifactId>spring-context</artifactId>
+      </dependency>
+
+      <dependency>
+         <groupId>org.springframework</groupId>
+         <artifactId>spring-web</artifactId>
+      </dependency>
+
+      <dependency>
+         <groupId>org.apache.commons</groupId>
+         <artifactId>commons-io</artifactId>
+      </dependency>
+
+      <dependency>
+         <groupId>org.apache.httpcomponents</groupId>
+         <artifactId>httpclient</artifactId>
+      </dependency>
+
+      <dependency>
+         <groupId>com.fasterxml.jackson.core</groupId>
+         <artifactId>jackson-core</artifactId>
+         <version>2.9.8</version>
+      </dependency>
+
+      <dependency>
+         <groupId>com.fasterxml.jackson.core</groupId>
+         <artifactId>jackson-databind</artifactId>
+      </dependency>
+
+      <dependency>
+         <groupId>com.fasterxml.jackson.core</groupId>
+         <artifactId>jackson-annotations</artifactId>
+         <version>2.9.8</version>
+      </dependency>
+
+      <dependency>
+         <groupId>commons-lang</groupId>
+         <artifactId>commons-lang</artifactId>
+      </dependency>
+
+      <dependency>
+         <groupId>org.slf4j</groupId>
+         <artifactId>slf4j-api</artifactId>
+      </dependency>
+
+      <dependency>
+         <groupId>org.projectlombok</groupId>
+         <artifactId>lombok</artifactId>
+      </dependency>
+      <!-- textrazor client -->
+     <!-- <dependency>
+         <groupId>com.textrazor</groupId>
+         <artifactId>textrazor</artifactId>
+         <version>1.0.12</version>
+      </dependency>-->
+      <dependency>
+         <groupId>com.textrazor</groupId>
+         <artifactId>textrazor</artifactId>
+         <version>1.0.10</version>
+         <exclusions>
+            <exclusion>
+               <groupId>com.fasterxml.jackson.core</groupId>
+               <artifactId>*</artifactId>
+            </exclusion>
+         </exclusions>
+      </dependency>
+      <!-- textrazor client -->
+
+      <!-- lightstreamer client -->
+      <dependency>
+         <groupId>com.lightstreamer</groupId>
+         <artifactId>sdk.client.java.se</artifactId>
+         <version>${lightstreamer.version}</version>
+      </dependency>
+
+      <!--for protobuf-->
+      <dependency>
+         <groupId>io.grpc</groupId>
+         <artifactId>grpc-netty-shaded</artifactId>
+         <version>1.34.0</version>
+      </dependency>
+      <dependency>
+         <groupId>io.grpc</groupId>
+         <artifactId>grpc-protobuf</artifactId>
+         <version>1.34.0</version>
+      </dependency>
+      <dependency>
+         <groupId>io.grpc</groupId>
+         <artifactId>grpc-stub</artifactId>
+         <version>1.34.0</version>
+      </dependency>
+      <dependency> <!-- necessary for Java 9+ -->
+         <groupId>org.apache.tomcat</groupId>
+         <artifactId>annotations-api</artifactId>
+         <version>6.0.53</version>
+         <scope>provided</scope>
+      </dependency>
+      <!--for protobuf compilation-->
+      <dependency>
+         <groupId>com.google.protobuf</groupId>
+         <artifactId>protobuf-java</artifactId>
+         <version>3.14.0</version>
+      </dependency>
+      <!--for protobuf compilation-->
+      <!--for protobuf-->
+
+   </dependencies>
+
+   <build>
+      <!--for protobuf compilation-->
+      <extensions>
+         <extension>
+            <groupId>kr.motd.maven</groupId>
+            <artifactId>os-maven-plugin</artifactId>
+            <version>1.6.2</version>
+         </extension>
+      </extensions>
+
+
+      <!--for protobuf compilation-->
+      <plugins>
+         <plugin>
+            <groupId>org.apache.maven.plugins</groupId>
+            <artifactId>maven-install-plugin</artifactId>
+            <version>2.4</version>
+            <executions>
+               <execution>
+                  <phase>clean</phase>
+                  <goals>
+                     <goal>install-file</goal>
+                  </goals>
+                  <configuration>
+                     <groupId>com.lightstreamer</groupId>
+                     <artifactId>sdk.client.java.se</artifactId>
+                     <version>${lightstreamer.version}</version>
+                     <packaging>jar</packaging>
+                     <file>${basedir}/lib/ls-client.6.0.2.20160510.jar</file>
+                  </configuration>
+               </execution>
+
+<!--               <execution>
+                  <id>textrazor-jar</id>
+                  <phase>clean</phase>
+                  <goals>
+                     <goal>install-file</goal>
+                  </goals>
+                  <configuration>
+                     <groupId>com.textrazor</groupId>
+                     <artifactId>textrazor</artifactId>
+                     <version>1.0.12</version>
+                     <packaging>jar</packaging>
+                     <file>${basedir}/lib/textrazor-1.0.12.jar</file>
+                  </configuration>
+               </execution>-->
+
+            </executions>
+         </plugin>
+         <!-- add generated proto buffer classes into the package -->
+         <plugin>
+            <groupId>org.codehaus.mojo</groupId>
+            <artifactId>build-helper-maven-plugin</artifactId>
+            <version>${build-helper-maven-plugin.version}</version>
+            <executions>
+               <execution>
+                  <id>add-classes</id>
+                  <phase>generate-sources</phase>
+                  <goals>
+                     <goal>add-source</goal>
+                  </goals>
+                  <configuration>
+                     <sources>
+                        <source>${protobuf.output.directory}</source>
+                     </sources>
+                  </configuration>
+               </execution>
+            </executions>
+         </plugin>
+
+         <plugin>
+            <artifactId>maven-source-plugin</artifactId>
+            <executions>
+               <execution>
+                  <id>attach-sources</id>
+                  <goals>
+                     <goal>jar</goal>
+                  </goals>
+               </execution>
+            </executions>
+         </plugin>
+
+         <!--for protobuf compilation-->
+         <plugin>
+            <groupId>org.xolstice.maven.plugins</groupId>
+            <artifactId>protobuf-maven-plugin</artifactId>
+            <version>0.6.1</version>
+            <configuration>
+               <protoSourceRoot>../../protos/igapi</protoSourceRoot>
+               <protocArtifact>com.google.protobuf:protoc:3.12.0:exe:${os.detected.classifier}</protocArtifact>
+               <pluginId>grpc-java</pluginId>
+               <pluginArtifact>io.grpc:protoc-gen-grpc-java:1.4.0:exe:${os.detected.classifier}</pluginArtifact>
+            </configuration>
+            <executions>
+               <execution>
+                  <goals>
+                     <goal>compile</goal>
+                     <goal>compile-custom</goal>
+                  </goals>
+               </execution>
+            </executions>
+         </plugin>
+         <!--for protobuf compilation-->
+
+         <plugin>
+            <groupId>org.apache.maven.plugins</groupId>
+            <artifactId>maven-assembly-plugin</artifactId>
+            <version>3.1.1</version>
+            <configuration>
+               <descriptorRefs>
+                  <descriptorRef>jar-with-dependencies</descriptorRef>
+               </descriptorRefs>
+               <archive>
+                  <manifest>
+                     <mainClass>com.iggroup.webapi.samples.client.grpc.GrpcServer</mainClass>
+                  </manifest>
+               </archive>
+            </configuration>
+            <executions>
+               <execution>
+                  <phase>package</phase>
+                  <goals>
+                     <goal>single</goal>
+                  </goals>
+               </execution>
+            </executions>
+         </plugin>
+
+      </plugins>
+   </build>
+
+</project>

@@ -1,0 +1,18 @@
+export const size = {
+    sm: 12,
+    md: 14,
+    lg: 16,
+    xlg: 18
+}
+export const family = {
+    primary: 'System',
+    secondary: 'System',
+    error: 'System',
+}
+export const weight = {
+    normalWeight: '200',
+    mediumWeight: '400',
+    heavyWeight: '600',
+    formLabel: '500',
+    fontBold: 'bold'
+}

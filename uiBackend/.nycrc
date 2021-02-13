@@ -1,0 +1,22 @@
+{
+    "statements": 100,
+    "branches": 100,
+    "functions": 100,
+    "lines": 100,
+    "include": [
+        "src/**/*.js"
+    ],
+    "exclude": [
+        "src/app/server.js",
+        "src/middleware/**/*"
+    ],
+    "reporter": [
+        "lcov",
+        "text-summary",
+        "text"
+    ],
+    "cache": false,
+    "all": true,
+    "check-coverage": true,
+    "report-dir": "./reports/"
+}
