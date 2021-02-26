@@ -1,62 +1,54 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { PropTypes } from 'prop-types';
-import { connect } from 'react-redux';
-import { Link } from 'react-router-dom';
+import { useSelector, useDispatch } from 'react-redux';
+import { Link, useLocation } from 'react-router-dom';
 import { Col, ButtonPrimary } from '../../components/common/style/styles';
 import CurrencyConverter from '../../components/common/component/currency';
 import { getTransactions } from "../../actions/transaction"
 import TransactionCard from './card';
 import { CardRow, Card, FormRow, Label, ProductName, AccountNumber, TabButton } from './style';
+import {Breadcrumb, BreadcrumbItem} from "reactstrap";
 
-function mapStateToProps(state) {
-    return {
+const TransactionHome = () => {
+    const dispatch = useDispatch();
+    const [tabs, setTabs] = useState(['ALL', 'IN', 'OUT']);
+    const [activeTab, setActiveTab] = useState({ activeTab: 'ALL' })
+
+    const useTransaction = useSelector(state => ({
         transactions: state.transactionState.transactions,
         isLoading: state.transactionState.isLoading,
         error: state.transactionState.error
-    };
-}
+    }));
 
-class TransactionHome extends React.Component {
-    constructor(props) {
-        super(props);
-        this.state = {
-            activeTab: 'ALL',
-            tabs: [
-                'ALL',
-                'IN',
-                'OUT'
-            ]
-        }
-    }
-    componentDidMount() {
-        console.log(this.props.location.product);
-        
-        this.props.dispatch(getTransactions('SA001', 'ALL'));
-    }
+    useEffect(() => {
+        dispatch(getTransactions('SA001', 'ALL'));
+    },[]);
 
-    getTransactionDetails = (e) => {
+    const getTransactionDetails = (e) => {
         e.preventDefault();
         let action = e.target.value;
-        if (action === this.state.activeTab) return;
-        this.setState({ activeTab: action });
-
+        if (action === setTabs) return;
+        setActiveTab(action);
         if (action === 'IN') {
-            this.props.dispatch(getTransactions('SA001', 'CR'));
+            dispatch(getTransactions('SA001', 'CR'));
         } else if (action === 'OUT') {
-            this.props.dispatch(getTransactions('SA001', 'DR'));
+            dispatch(getTransactions('SA001', 'DR'));
         } else {
-            this.props.dispatch(getTransactions('SA001', 'ALL'));
+            dispatch(getTransactions('SA001', 'ALL'));
         }
 
     };
 
-    render() {
-        const product = this.props.location.product;
-        const { isLoading, transactions } = this.props;
+    const { isLoading, transactions } = useTransaction;
 
+    const { product } = useLocation();
 
         return (
             <div>
+                <Breadcrumb>
+                    <BreadcrumbItem>YOU ARE HERE</BreadcrumbItem>
+                    <BreadcrumbItem active>Products > Transactions</BreadcrumbItem>
+                </Breadcrumb>
                 <CardRow>
                     <Col alignItems={'flex-start'}>
                         <Link to={`/`}><ButtonPrimary> &lt; Back to Accounts</ButtonPrimary> </Link>
@@ -111,10 +103,10 @@ class TransactionHome extends React.Component {
 
                 <CardRow>
                     {
-                        this.state.tabs.map((tab) =>
+                        tabs.map((tab) =>
                             <Col key={tab}>
-                                <TabButton id={tab} value={tab} tabName={tab} isActive={this.state.activeTab}
-                                    onClick={(e) => { this.getTransactionDetails(e) }}>{tab}</TabButton>
+                                <TabButton id={tab} value={tab} tabName={tab} isActive={setActiveTab}
+                                           onClick={(e) => { getTransactionDetails(e) }}>{tab}</TabButton>
                             </Col>
                         )
                     }
@@ -123,7 +115,6 @@ class TransactionHome extends React.Component {
             </div>
         );
     }
-}
 TransactionHome.propTypes = {
     product: PropTypes.object,
     location: PropTypes.object,
@@ -132,4 +123,4 @@ TransactionHome.propTypes = {
     error: PropTypes.string,
     dispatch: PropTypes.func,
 };
-export default connect(mapStateToProps)(TransactionHome);
+export default TransactionHome;

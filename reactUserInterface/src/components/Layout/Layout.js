@@ -31,6 +31,7 @@ import Profile from '../../pages/profile'
 import Privacy from '../../pages/privacy'
 import ProductHome from '../../pages/product/home';
 import TransactionHome from '../../pages/transaction/home';
+import IgTrade from '../../pages/igtrade/Igtrade';
 
 class Layout extends React.Component {
   constructor(props) {
@@ -70,6 +71,7 @@ class Layout extends React.Component {
               <Route path="/app/components/maps" exact component={Maps} />
               <Route path="/app/product" exact component={ProductHome} />
               <Route path="/app/product/:productId" exact component={TransactionHome} />
+              <Route path="/app/igtrade" exact component={IgTrade} />
               <Route component={NotFound} />
             </Switch>
           </main>

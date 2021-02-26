@@ -22,6 +22,7 @@ type GmailapiSvcClient interface {
 	GetConfirmationDetails(ctx context.Context, in *OTCOrderResponse, opts ...grpc.CallOption) (*ConfirmationResponse, error)
 	GetClientSentiment(ctx context.Context, in *ClientSentimentRequest, opts ...grpc.CallOption) (*ClientSentimentResponse, error)
 	OpenLightStreamerSubscription(ctx context.Context, in *LightStreamerSubRequest, opts ...grpc.CallOption) (GmailapiSvc_OpenLightStreamerSubscriptionClient, error)
+	MarketSearch(ctx context.Context, in *ClientSentimentRequest, opts ...grpc.CallOption) (*Markets, error)
 }
 
 type gmailapiSvcClient struct {
@@ -100,6 +101,15 @@ func (x *gmailapiSvcOpenLightStreamerSubscriptionClient) Recv() (*LightStreamerS
 	return m, nil
 }
 
+func (c *gmailapiSvcClient) MarketSearch(ctx context.Context, in *ClientSentimentRequest, opts ...grpc.CallOption) (*Markets, error) {
+	out := new(Markets)
+	err := c.cc.Invoke(ctx, "/gmailapi.GmailapiSvc/marketSearch", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 // GmailapiSvcServer is the server API for GmailapiSvc service.
 // All implementations must embed UnimplementedGmailapiSvcServer
 // for forward compatibility
@@ -109,6 +119,7 @@ type GmailapiSvcServer interface {
 	GetConfirmationDetails(context.Context, *OTCOrderResponse) (*ConfirmationResponse, error)
 	GetClientSentiment(context.Context, *ClientSentimentRequest) (*ClientSentimentResponse, error)
 	OpenLightStreamerSubscription(*LightStreamerSubRequest, GmailapiSvc_OpenLightStreamerSubscriptionServer) error
+	MarketSearch(context.Context, *ClientSentimentRequest) (*Markets, error)
 	mustEmbedUnimplementedGmailapiSvcServer()
 }
 
@@ -130,6 +141,9 @@ func (UnimplementedGmailapiSvcServer) GetClientSentiment(context.Context, *Clien
 }
 func (UnimplementedGmailapiSvcServer) OpenLightStreamerSubscription(*LightStreamerSubRequest, GmailapiSvc_OpenLightStreamerSubscriptionServer) error {
 	return status.Errorf(codes.Unimplemented, "method OpenLightStreamerSubscription not implemented")
+}
+func (UnimplementedGmailapiSvcServer) MarketSearch(context.Context, *ClientSentimentRequest) (*Markets, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method MarketSearch not implemented")
 }
 func (UnimplementedGmailapiSvcServer) mustEmbedUnimplementedGmailapiSvcServer() {}
 
@@ -237,6 +251,24 @@ func (x *gmailapiSvcOpenLightStreamerSubscriptionServer) Send(m *LightStreamerSu
 	return x.ServerStream.SendMsg(m)
 }
 
+func _GmailapiSvc_MarketSearch_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(ClientSentimentRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(GmailapiSvcServer).MarketSearch(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/gmailapi.GmailapiSvc/marketSearch",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(GmailapiSvcServer).MarketSearch(ctx, req.(*ClientSentimentRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 var _GmailapiSvc_serviceDesc = grpc.ServiceDesc{
 	ServiceName: "gmailapi.GmailapiSvc",
 	HandlerType: (*GmailapiSvcServer)(nil),
@@ -256,6 +288,10 @@ var _GmailapiSvc_serviceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "getClientSentiment",
 			Handler:    _GmailapiSvc_GetClientSentiment_Handler,
+		},
+		{
+			MethodName: "marketSearch",
+			Handler:    _GmailapiSvc_MarketSearch_Handler,
 		},
 	},
 	Streams: []grpc.StreamDesc{

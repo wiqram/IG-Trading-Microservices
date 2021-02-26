@@ -57,7 +57,8 @@ func newGateway(ctx context.Context) (http.Handler, error) {
 	grpcServerAddress := os.Getenv("HOST") + ":" + os.Getenv("PORT")
 	grpcServerEndpoint := flag.String("grpc-server-endpoint", grpcServerAddress, "gRPC server endpoint")
 	//add specific headers to handle CORS in new instance of ServeMux
-	mux := runtime.NewServeMux(runtime.WithForwardResponseOption(httpResponseModifier))
+	//mux := runtime.NewServeMux(runtime.WithForwardResponseOption(httpResponseModifier))
+	mux := runtime.NewServeMux()
 	handler := cors.Default().Handler(mux)
 	opts := []grpc.DialOption{grpc.WithInsecure()}
 	err := gw.RegisterAPIHandlerFromEndpoint(ctx, mux, *grpcServerEndpoint, opts)

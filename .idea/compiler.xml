@@ -7,8 +7,8 @@
         <sourceOutputDir name="target/generated-sources/annotations" />
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
-        <module name="ig-webapi-java-client" />
         <module name="ig-webapi-java-sample-console-ui" />
+        <module name="ig-webapi-java-client" />
       </profile>
     </annotationProcessing>
   </component>

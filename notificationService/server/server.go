@@ -12,7 +12,6 @@ import (
 	"net"
 	"os"
 	"reflect"
-	"strconv"
 	"time"
 )
 
@@ -76,8 +75,8 @@ func (s *server) SubscribeToMail(ctx context.Context, in *pb.SubscriptionRequest
 		log.Println("Api: SubscribeToMail", "failed to subscribe to mailbox", err.Error())
 		return nil, err
 	}
-	fmt.Print("This is request Duration at server level -- \n ", in.Duration)
-	fmt.Print("Now calling the service to keep Watching for any changes since watchrequest was initiated\n ", strconv.Itoa(int(subResp.HistoryId)))
+	/*fmt.Print("This is request Duration at server level -- \n ", in.Duration)
+	fmt.Print("Now calling the service to keep Watching for any changes since watchrequest was initiated\n ", strconv.Itoa(int(subResp.HistoryId)))*/
 	err = c.PullEmails("", "", "", in.EmailId, int(in.Duration), *subResp)
 	if err != nil {
 		log.Println("Api: PullMail", "failed to pull any emails from gmail subscription topic", err.Error())
@@ -95,10 +94,10 @@ func (s *server) OpenOTCOrder(ctx context.Context, in *pb.OTCOrderRequest) (*pb.
 	if err := ig.Login(); err != nil {
 		fmt.Println("Unable to login into IG account", err)
 	}
-	fmt.Printf("\nthis is what we get back from calling new igmarkets -- AuthToken", ig.OAuthToken.AccessToken)
-	fmt.Printf("\nthis is what we get back from calling new igmarkets -- AuthToken", ig.OAuthToken.ExpiresIn)
-	fmt.Printf("\nthis is what we get back from calling new igmarkets -- ", ig.APIKey)
-	fmt.Printf("\nthis is what we get back from calling new igmarkets -- ", ig.Identifier)
+	/*	fmt.Printf("\nthis is what we get back from calling new igmarkets -- AuthToken", ig.OAuthToken.AccessToken)
+		fmt.Printf("\nthis is what we get back from calling new igmarkets -- AuthToken", ig.OAuthToken.ExpiresIn)
+		fmt.Printf("\nthis is what we get back from calling new igmarkets -- ", ig.APIKey)
+		fmt.Printf("\nthis is what we get back from calling new igmarkets -- ", ig.Identifier)*/
 
 	oTCOrderRequest := igmarkets.OTCOrderRequest{
 		Epic: in.Epic,
@@ -198,6 +197,25 @@ func (s *server) GetConfirmationDetails(ctx context.Context, in *pb.OTCOrderResp
 	fmt.Printf("\nthis is what we get back from calling new igmarkets EPC-- ", resp.QuoteID)
 
 	return &confResp, nil
+}
+
+func (s *server) MarketSearch(ctx context.Context, in *pb.ClientSentimentRequest) (*pb.Markets, error) {
+	httpTimeout := time.Duration(15 * time.Second)
+	ig := igmarkets.New(igmarkets.DemoAPIURL, "1ee808908ed01577d3ab2b19ef493d0f80e24612", "XXXK3", "wiqramdemo", "DemoPWD123", httpTimeout)
+	if err := ig.Login(); err != nil {
+		fmt.Println("Unable to login into IG account", err)
+	}
+	mSresp, err := ig.MarketSearch(in.MarketId)
+	if err != nil {
+		log.Println("Api: PullMail", "failed to pull any emails from gmail subscription topic", err.Error())
+		return nil, err
+	}
+	for _, n := range mSresp.Markets {
+		fmt.Printf("\nthis is what we get back from calling new igmarkets EPC-- ", n.Epic)
+		fmt.Printf("\nthis is what we get back from calling new igmarkets EPC-- ", n.Expiry)
+		fmt.Printf("\nthis is what we get back from calling new igmarkets EPC-- ", n.InstrumentName)
+	}
+	return mSresp, nil
 }
 
 // getClientSentiment subscribes to the mailbox with specific label id

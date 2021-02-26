@@ -63,6 +63,11 @@ const Sidebar = () => (
             headerLink="/app/product"
             glyph="products"
         />
+        <LinksGroup
+            header="IG Trade"
+            headerLink="/app/igtrade"
+            glyph="igtrade"
+        />
     </ul>
   </nav>
 );

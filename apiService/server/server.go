@@ -178,6 +178,11 @@ func (s *Server) GetClientSentiment(ctx context.Context, in *gmailapi.ClientSent
 	return s.gmailapiSvcClient.GetClientSentiment(ctx, in)
 }
 
+// MarketSearch Open Trade using UIbackend Trade Action
+func (s *Server) MarketSearch(ctx context.Context, in *gmailapi.ClientSentimentRequest) (*gmailapi.Markets, error) {
+	return s.gmailapiSvcClient.MarketSearch(ctx, in)
+}
+
 // OpenLightStreamerSubscription Open Trade using UIbackend Trade Action
 func (s *Server) OpenLightStreamerSubscription(ctx context.Context, in *gmailapi.LightStreamerSubRequest) (*gmailapi.LightStreamerSubResponse, error) {
 	resp, err := s.gmailapiSvcClient.OpenLightStreamerSubscription(ctx, in)

@@ -109,6 +109,37 @@
         ]
       }
     },
+    "/v1/igapi/marketsearch/{marketId}": {
+      "get": {
+        "summary": "MarketSearch retrieves all products",
+        "operationId": "API_MarketSearch",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/gmailapiMarkets"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "marketId",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "tags": [
+          "API"
+        ]
+      }
+    },
     "/v1/igapi/positions/otc": {
       "post": {
         "summary": "openOTCOrder opens a trade over the counter on specific epic",
@@ -1132,6 +1163,87 @@
         }
       },
       "title": "LightStreamerSubResponse - Response for client sentiment"
+    },
+    "gmailapiMarketData": {
+      "type": "object",
+      "properties": {
+        "bid": {
+          "type": "number",
+          "format": "float"
+        },
+        "delayTime": {
+          "type": "string",
+          "format": "int64"
+        },
+        "epic": {
+          "type": "string"
+        },
+        "exchangeId": {
+          "type": "string"
+        },
+        "expiry": {
+          "type": "string"
+        },
+        "high": {
+          "type": "number",
+          "format": "float"
+        },
+        "instrumentName": {
+          "type": "string"
+        },
+        "instrumentType": {
+          "type": "string"
+        },
+        "lotSize": {
+          "type": "number",
+          "format": "float"
+        },
+        "low": {
+          "type": "number",
+          "format": "float"
+        },
+        "marketStatus": {
+          "type": "string"
+        },
+        "netChange": {
+          "type": "number",
+          "format": "float"
+        },
+        "offer": {
+          "type": "number",
+          "format": "float"
+        },
+        "percentageChange": {
+          "type": "number",
+          "format": "float"
+        },
+        "scalingFactor": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "streamingPricesAvailable": {
+          "type": "boolean"
+        },
+        "updateTime": {
+          "type": "string"
+        },
+        "updateTimeUTC": {
+          "type": "string"
+        }
+      },
+      "title": "MarketData - Subset of OTCWorkingOrder"
+    },
+    "gmailapiMarkets": {
+      "type": "object",
+      "properties": {
+        "marketData": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/gmailapiMarketData"
+          }
+        }
+      },
+      "title": "Markets - Response from positions endpoint"
     },
     "gmailapiOTCOrderRequest": {
       "type": "object",
