@@ -124,6 +124,13 @@ service API {
         };
     }
 
+    //MarketSearch retrieves all products
+    rpc MarketSearch (gmailapi.ClientSentimentRequest) returns (gmailapi.Markets) {
+        option (google.api.http) = {
+            get: "/v1/igapi/marketsearch/{marketId}"
+        };
+    }
+
     //OpenLightStreamerSubscription retrieves all products
     rpc OpenLightStreamerSubscription (gmailapi.LightStreamerSubRequest) returns (gmailapi.LightStreamerSubResponse) {
         option (google.api.http) = {

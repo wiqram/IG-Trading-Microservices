@@ -45,8 +45,8 @@ var file_protos_api_api_proto_rawDesc = []byte{
 	0x69, 0x2f, 0x67, 0x6d, 0x61, 0x69, 0x6c, 0x61, 0x70, 0x69, 0x2e, 0x70, 0x72, 0x6f, 0x74, 0x6f,
 	0x1a, 0x11, 0x69, 0x67, 0x61, 0x70, 0x69, 0x2f, 0x69, 0x67, 0x61, 0x70, 0x69, 0x2e, 0x70, 0x72,
 	0x6f, 0x74, 0x6f, 0x1a, 0x19, 0x75, 0x69, 0x62, 0x61, 0x63, 0x6b, 0x65, 0x6e, 0x64, 0x2f, 0x75,
-	0x69, 0x62, 0x61, 0x63, 0x6b, 0x65, 0x6e, 0x64, 0x2e, 0x70, 0x72, 0x6f, 0x74, 0x6f, 0x32, 0xbb,
-	0x13, 0x0a, 0x03, 0x41, 0x50, 0x49, 0x12, 0x61, 0x0a, 0x0c, 0x52, 0x65, 0x67, 0x69, 0x73, 0x74,
+	0x69, 0x62, 0x61, 0x63, 0x6b, 0x65, 0x6e, 0x64, 0x2e, 0x70, 0x72, 0x6f, 0x74, 0x6f, 0x32, 0xab,
+	0x14, 0x0a, 0x03, 0x41, 0x50, 0x49, 0x12, 0x61, 0x0a, 0x0c, 0x52, 0x65, 0x67, 0x69, 0x73, 0x74,
 	0x65, 0x72, 0x55, 0x73, 0x65, 0x72, 0x12, 0x1a, 0x2e, 0x64, 0x65, 0x6d, 0x6f, 0x5f, 0x75, 0x73,
 	0x65, 0x72, 0x2e, 0x52, 0x65, 0x67, 0x69, 0x73, 0x74, 0x65, 0x72, 0x52, 0x65, 0x71, 0x75, 0x65,
 	0x73, 0x74, 0x1a, 0x17, 0x2e, 0x64, 0x65, 0x6d, 0x6f, 0x5f, 0x75, 0x73, 0x65, 0x72, 0x2e, 0x55,
@@ -155,6 +155,13 @@ var file_protos_api_api_proto_rawDesc = []byte{
 	0x73, 0x70, 0x6f, 0x6e, 0x73, 0x65, 0x22, 0x2c, 0x82, 0xd3, 0xe4, 0x93, 0x02, 0x26, 0x12, 0x24,
 	0x2f, 0x76, 0x31, 0x2f, 0x69, 0x67, 0x61, 0x70, 0x69, 0x2f, 0x63, 0x6c, 0x69, 0x65, 0x6e, 0x74,
 	0x73, 0x65, 0x6e, 0x74, 0x69, 0x6d, 0x65, 0x6e, 0x74, 0x2f, 0x7b, 0x6d, 0x61, 0x72, 0x6b, 0x65,
+	0x74, 0x49, 0x64, 0x7d, 0x12, 0x6e, 0x0a, 0x0c, 0x4d, 0x61, 0x72, 0x6b, 0x65, 0x74, 0x53, 0x65,
+	0x61, 0x72, 0x63, 0x68, 0x12, 0x20, 0x2e, 0x67, 0x6d, 0x61, 0x69, 0x6c, 0x61, 0x70, 0x69, 0x2e,
+	0x43, 0x6c, 0x69, 0x65, 0x6e, 0x74, 0x53, 0x65, 0x6e, 0x74, 0x69, 0x6d, 0x65, 0x6e, 0x74, 0x52,
+	0x65, 0x71, 0x75, 0x65, 0x73, 0x74, 0x1a, 0x11, 0x2e, 0x67, 0x6d, 0x61, 0x69, 0x6c, 0x61, 0x70,
+	0x69, 0x2e, 0x4d, 0x61, 0x72, 0x6b, 0x65, 0x74, 0x73, 0x22, 0x29, 0x82, 0xd3, 0xe4, 0x93, 0x02,
+	0x23, 0x12, 0x21, 0x2f, 0x76, 0x31, 0x2f, 0x69, 0x67, 0x61, 0x70, 0x69, 0x2f, 0x6d, 0x61, 0x72,
+	0x6b, 0x65, 0x74, 0x73, 0x65, 0x61, 0x72, 0x63, 0x68, 0x2f, 0x7b, 0x6d, 0x61, 0x72, 0x6b, 0x65,
 	0x74, 0x49, 0x64, 0x7d, 0x12, 0x9b, 0x01, 0x0a, 0x1d, 0x4f, 0x70, 0x65, 0x6e, 0x4c, 0x69, 0x67,
 	0x68, 0x74, 0x53, 0x74, 0x72, 0x65, 0x61, 0x6d, 0x65, 0x72, 0x53, 0x75, 0x62, 0x73, 0x63, 0x72,
 	0x69, 0x70, 0x74, 0x69, 0x6f, 0x6e, 0x12, 0x21, 0x2e, 0x67, 0x6d, 0x61, 0x69, 0x6c, 0x61, 0x70,
@@ -235,8 +242,9 @@ var file_protos_api_api_proto_goTypes = []interface{}{
 	(*uibackend.TransactionsResponse)(nil),    // 23: demo_uibackend.TransactionsResponse
 	(*gmailapi.ConfirmationResponse)(nil),     // 24: gmailapi.ConfirmationResponse
 	(*gmailapi.ClientSentimentResponse)(nil),  // 25: gmailapi.ClientSentimentResponse
-	(*gmailapi.LightStreamerSubResponse)(nil), // 26: gmailapi.LightStreamerSubResponse
-	(*igapi.TextRazorResponse)(nil),           // 27: demo_igapi.TextRazorResponse
+	(*gmailapi.Markets)(nil),                  // 26: gmailapi.Markets
+	(*gmailapi.LightStreamerSubResponse)(nil), // 27: gmailapi.LightStreamerSubResponse
+	(*igapi.TextRazorResponse)(nil),           // 28: demo_igapi.TextRazorResponse
 }
 var file_protos_api_api_proto_depIdxs = []int32{
 	0,  // 0: demo_api.API.RegisterUser:input_type -> demo_user.RegisterRequest
@@ -253,32 +261,34 @@ var file_protos_api_api_proto_depIdxs = []int32{
 	11, // 11: demo_api.API.OpenOTCOrder:input_type -> gmailapi.OTCOrderRequest
 	12, // 12: demo_api.API.GetConfirmationDetails:input_type -> gmailapi.OTCOrderResponse
 	13, // 13: demo_api.API.GetClientSentiment:input_type -> gmailapi.ClientSentimentRequest
-	14, // 14: demo_api.API.OpenLightStreamerSubscription:input_type -> gmailapi.LightStreamerSubRequest
-	15, // 15: demo_api.API.TestAccountTextRazor:input_type -> demo_igapi.TextRazorRequest
-	15, // 16: demo_api.API.TestClassifierTextRazor:input_type -> demo_igapi.TextRazorRequest
-	15, // 17: demo_api.API.TestDictionaryTextRazor:input_type -> demo_igapi.TextRazorRequest
-	15, // 18: demo_api.API.TestAnalysisTextRazor:input_type -> demo_igapi.TextRazorRequest
-	16, // 19: demo_api.API.RegisterUser:output_type -> demo_user.UserResponse
-	16, // 20: demo_api.API.LoginUser:output_type -> demo_user.UserResponse
-	17, // 21: demo_api.API.CreateProject:output_type -> demo_project.ProjectResponse
-	17, // 22: demo_api.API.GetProject:output_type -> demo_project.ProjectResponse
-	18, // 23: demo_api.API.CreateTask:output_type -> demo_task.TaskResponse
-	18, // 24: demo_api.API.UpdateTask:output_type -> demo_task.TaskResponse
-	19, // 25: demo_api.API.ListTasks:output_type -> demo_task.ListTasksResponse
-	20, // 26: demo_api.API.SubscribeToMail:output_type -> gmailapi.SubscriptionResponse
-	21, // 27: demo_api.API.TradeAction:output_type -> demo_igapi.TradeResponse
-	22, // 28: demo_api.API.GetProducts:output_type -> demo_uibackend.ProductsResponse
-	23, // 29: demo_api.API.GetTransactions:output_type -> demo_uibackend.TransactionsResponse
-	12, // 30: demo_api.API.OpenOTCOrder:output_type -> gmailapi.OTCOrderResponse
-	24, // 31: demo_api.API.GetConfirmationDetails:output_type -> gmailapi.ConfirmationResponse
-	25, // 32: demo_api.API.GetClientSentiment:output_type -> gmailapi.ClientSentimentResponse
-	26, // 33: demo_api.API.OpenLightStreamerSubscription:output_type -> gmailapi.LightStreamerSubResponse
-	27, // 34: demo_api.API.TestAccountTextRazor:output_type -> demo_igapi.TextRazorResponse
-	27, // 35: demo_api.API.TestClassifierTextRazor:output_type -> demo_igapi.TextRazorResponse
-	27, // 36: demo_api.API.TestDictionaryTextRazor:output_type -> demo_igapi.TextRazorResponse
-	27, // 37: demo_api.API.TestAnalysisTextRazor:output_type -> demo_igapi.TextRazorResponse
-	19, // [19:38] is the sub-list for method output_type
-	0,  // [0:19] is the sub-list for method input_type
+	13, // 14: demo_api.API.MarketSearch:input_type -> gmailapi.ClientSentimentRequest
+	14, // 15: demo_api.API.OpenLightStreamerSubscription:input_type -> gmailapi.LightStreamerSubRequest
+	15, // 16: demo_api.API.TestAccountTextRazor:input_type -> demo_igapi.TextRazorRequest
+	15, // 17: demo_api.API.TestClassifierTextRazor:input_type -> demo_igapi.TextRazorRequest
+	15, // 18: demo_api.API.TestDictionaryTextRazor:input_type -> demo_igapi.TextRazorRequest
+	15, // 19: demo_api.API.TestAnalysisTextRazor:input_type -> demo_igapi.TextRazorRequest
+	16, // 20: demo_api.API.RegisterUser:output_type -> demo_user.UserResponse
+	16, // 21: demo_api.API.LoginUser:output_type -> demo_user.UserResponse
+	17, // 22: demo_api.API.CreateProject:output_type -> demo_project.ProjectResponse
+	17, // 23: demo_api.API.GetProject:output_type -> demo_project.ProjectResponse
+	18, // 24: demo_api.API.CreateTask:output_type -> demo_task.TaskResponse
+	18, // 25: demo_api.API.UpdateTask:output_type -> demo_task.TaskResponse
+	19, // 26: demo_api.API.ListTasks:output_type -> demo_task.ListTasksResponse
+	20, // 27: demo_api.API.SubscribeToMail:output_type -> gmailapi.SubscriptionResponse
+	21, // 28: demo_api.API.TradeAction:output_type -> demo_igapi.TradeResponse
+	22, // 29: demo_api.API.GetProducts:output_type -> demo_uibackend.ProductsResponse
+	23, // 30: demo_api.API.GetTransactions:output_type -> demo_uibackend.TransactionsResponse
+	12, // 31: demo_api.API.OpenOTCOrder:output_type -> gmailapi.OTCOrderResponse
+	24, // 32: demo_api.API.GetConfirmationDetails:output_type -> gmailapi.ConfirmationResponse
+	25, // 33: demo_api.API.GetClientSentiment:output_type -> gmailapi.ClientSentimentResponse
+	26, // 34: demo_api.API.MarketSearch:output_type -> gmailapi.Markets
+	27, // 35: demo_api.API.OpenLightStreamerSubscription:output_type -> gmailapi.LightStreamerSubResponse
+	28, // 36: demo_api.API.TestAccountTextRazor:output_type -> demo_igapi.TextRazorResponse
+	28, // 37: demo_api.API.TestClassifierTextRazor:output_type -> demo_igapi.TextRazorResponse
+	28, // 38: demo_api.API.TestDictionaryTextRazor:output_type -> demo_igapi.TextRazorResponse
+	28, // 39: demo_api.API.TestAnalysisTextRazor:output_type -> demo_igapi.TextRazorResponse
+	20, // [20:40] is the sub-list for method output_type
+	0,  // [0:20] is the sub-list for method input_type
 	0,  // [0:0] is the sub-list for extension type_name
 	0,  // [0:0] is the sub-list for extension extendee
 	0,  // [0:0] is the sub-list for field type_name

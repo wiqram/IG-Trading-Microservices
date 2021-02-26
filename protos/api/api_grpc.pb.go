@@ -51,6 +51,8 @@ type APIClient interface {
 	GetConfirmationDetails(ctx context.Context, in *gmailapi.OTCOrderResponse, opts ...grpc.CallOption) (*gmailapi.ConfirmationResponse, error)
 	//GetClientSentiment retrieves all products
 	GetClientSentiment(ctx context.Context, in *gmailapi.ClientSentimentRequest, opts ...grpc.CallOption) (*gmailapi.ClientSentimentResponse, error)
+	//MarketSearch retrieves all products
+	MarketSearch(ctx context.Context, in *gmailapi.ClientSentimentRequest, opts ...grpc.CallOption) (*gmailapi.Markets, error)
 	//OpenLightStreamerSubscription retrieves all products
 	OpenLightStreamerSubscription(ctx context.Context, in *gmailapi.LightStreamerSubRequest, opts ...grpc.CallOption) (*gmailapi.LightStreamerSubResponse, error)
 	// TestAccountTextRazor set a trade on IG Broker based on action from email
@@ -197,6 +199,15 @@ func (c *aPIClient) GetClientSentiment(ctx context.Context, in *gmailapi.ClientS
 	return out, nil
 }
 
+func (c *aPIClient) MarketSearch(ctx context.Context, in *gmailapi.ClientSentimentRequest, opts ...grpc.CallOption) (*gmailapi.Markets, error) {
+	out := new(gmailapi.Markets)
+	err := c.cc.Invoke(ctx, "/demo_api.API/MarketSearch", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 func (c *aPIClient) OpenLightStreamerSubscription(ctx context.Context, in *gmailapi.LightStreamerSubRequest, opts ...grpc.CallOption) (*gmailapi.LightStreamerSubResponse, error) {
 	out := new(gmailapi.LightStreamerSubResponse)
 	err := c.cc.Invoke(ctx, "/demo_api.API/OpenLightStreamerSubscription", in, out, opts...)
@@ -274,6 +285,8 @@ type APIServer interface {
 	GetConfirmationDetails(context.Context, *gmailapi.OTCOrderResponse) (*gmailapi.ConfirmationResponse, error)
 	//GetClientSentiment retrieves all products
 	GetClientSentiment(context.Context, *gmailapi.ClientSentimentRequest) (*gmailapi.ClientSentimentResponse, error)
+	//MarketSearch retrieves all products
+	MarketSearch(context.Context, *gmailapi.ClientSentimentRequest) (*gmailapi.Markets, error)
 	//OpenLightStreamerSubscription retrieves all products
 	OpenLightStreamerSubscription(context.Context, *gmailapi.LightStreamerSubRequest) (*gmailapi.LightStreamerSubResponse, error)
 	// TestAccountTextRazor set a trade on IG Broker based on action from email
@@ -332,6 +345,9 @@ func (UnimplementedAPIServer) GetConfirmationDetails(context.Context, *gmailapi.
 }
 func (UnimplementedAPIServer) GetClientSentiment(context.Context, *gmailapi.ClientSentimentRequest) (*gmailapi.ClientSentimentResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method GetClientSentiment not implemented")
+}
+func (UnimplementedAPIServer) MarketSearch(context.Context, *gmailapi.ClientSentimentRequest) (*gmailapi.Markets, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method MarketSearch not implemented")
 }
 func (UnimplementedAPIServer) OpenLightStreamerSubscription(context.Context, *gmailapi.LightStreamerSubRequest) (*gmailapi.LightStreamerSubResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method OpenLightStreamerSubscription not implemented")
@@ -613,6 +629,24 @@ func _API_GetClientSentiment_Handler(srv interface{}, ctx context.Context, dec f
 	return interceptor(ctx, in, info, handler)
 }
 
+func _API_MarketSearch_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(gmailapi.ClientSentimentRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(APIServer).MarketSearch(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/demo_api.API/MarketSearch",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(APIServer).MarketSearch(ctx, req.(*gmailapi.ClientSentimentRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 func _API_OpenLightStreamerSubscription_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
 	in := new(gmailapi.LightStreamerSubRequest)
 	if err := dec(in); err != nil {
@@ -762,6 +796,10 @@ var _API_serviceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "GetClientSentiment",
 			Handler:    _API_GetClientSentiment_Handler,
+		},
+		{
+			MethodName: "MarketSearch",
+			Handler:    _API_MarketSearch_Handler,
 		},
 		{
 			MethodName: "OpenLightStreamerSubscription",
