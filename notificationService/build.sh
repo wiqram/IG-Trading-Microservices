@@ -17,6 +17,7 @@ fi
 
 export GO111MODULE=on
 
-go mod verify
+go clean --modcache
 go mod vendor
+go mod verify
 go install -v ./...
