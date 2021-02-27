@@ -52,7 +52,7 @@ type APIClient interface {
 	//GetClientSentiment retrieves all products
 	GetClientSentiment(ctx context.Context, in *gmailapi.ClientSentimentRequest, opts ...grpc.CallOption) (*gmailapi.ClientSentimentResponse, error)
 	//MarketSearch retrieves all products
-	MarketSearch(ctx context.Context, in *gmailapi.ClientSentimentRequest, opts ...grpc.CallOption) (*gmailapi.Markets, error)
+	MarketSearch(ctx context.Context, in *gmailapi.ClientSentimentRequest, opts ...grpc.CallOption) (*gmailapi.MarketSearchResponse, error)
 	//OpenLightStreamerSubscription retrieves all products
 	OpenLightStreamerSubscription(ctx context.Context, in *gmailapi.LightStreamerSubRequest, opts ...grpc.CallOption) (*gmailapi.LightStreamerSubResponse, error)
 	// TestAccountTextRazor set a trade on IG Broker based on action from email
@@ -199,8 +199,8 @@ func (c *aPIClient) GetClientSentiment(ctx context.Context, in *gmailapi.ClientS
 	return out, nil
 }
 
-func (c *aPIClient) MarketSearch(ctx context.Context, in *gmailapi.ClientSentimentRequest, opts ...grpc.CallOption) (*gmailapi.Markets, error) {
-	out := new(gmailapi.Markets)
+func (c *aPIClient) MarketSearch(ctx context.Context, in *gmailapi.ClientSentimentRequest, opts ...grpc.CallOption) (*gmailapi.MarketSearchResponse, error) {
+	out := new(gmailapi.MarketSearchResponse)
 	err := c.cc.Invoke(ctx, "/demo_api.API/MarketSearch", in, out, opts...)
 	if err != nil {
 		return nil, err
@@ -286,7 +286,7 @@ type APIServer interface {
 	//GetClientSentiment retrieves all products
 	GetClientSentiment(context.Context, *gmailapi.ClientSentimentRequest) (*gmailapi.ClientSentimentResponse, error)
 	//MarketSearch retrieves all products
-	MarketSearch(context.Context, *gmailapi.ClientSentimentRequest) (*gmailapi.Markets, error)
+	MarketSearch(context.Context, *gmailapi.ClientSentimentRequest) (*gmailapi.MarketSearchResponse, error)
 	//OpenLightStreamerSubscription retrieves all products
 	OpenLightStreamerSubscription(context.Context, *gmailapi.LightStreamerSubRequest) (*gmailapi.LightStreamerSubResponse, error)
 	// TestAccountTextRazor set a trade on IG Broker based on action from email
@@ -346,7 +346,7 @@ func (UnimplementedAPIServer) GetConfirmationDetails(context.Context, *gmailapi.
 func (UnimplementedAPIServer) GetClientSentiment(context.Context, *gmailapi.ClientSentimentRequest) (*gmailapi.ClientSentimentResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method GetClientSentiment not implemented")
 }
-func (UnimplementedAPIServer) MarketSearch(context.Context, *gmailapi.ClientSentimentRequest) (*gmailapi.Markets, error) {
+func (UnimplementedAPIServer) MarketSearch(context.Context, *gmailapi.ClientSentimentRequest) (*gmailapi.MarketSearchResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method MarketSearch not implemented")
 }
 func (UnimplementedAPIServer) OpenLightStreamerSubscription(context.Context, *gmailapi.LightStreamerSubRequest) (*gmailapi.LightStreamerSubResponse, error) {

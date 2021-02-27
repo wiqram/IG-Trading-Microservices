@@ -10,7 +10,7 @@ service GmailapiSvc {
     rpc getConfirmationDetails (OTCOrderResponse) returns (ConfirmationResponse);
     rpc getClientSentiment (ClientSentimentRequest) returns (ClientSentimentResponse);
     rpc openLightStreamerSubscription (LightStreamerSubRequest) returns (stream LightStreamerSubResponse);
-    rpc marketSearch (ClientSentimentRequest) returns (Markets);
+    rpc marketSearch (ClientSentimentRequest) returns (MarketSearchResponse);
 }
 
 //The request containing any user identifier, the labelname to monitor and the topicname to subscribe to
@@ -92,7 +92,7 @@ message Position {
 }
 
 // Markets - Response from positions endpoint
-message Markets {
+message MarketSearchResponse {
     repeated MarketData marketData = 1;
 }
 

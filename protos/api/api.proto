@@ -125,7 +125,7 @@ service API {
     }
 
     //MarketSearch retrieves all products
-    rpc MarketSearch (gmailapi.ClientSentimentRequest) returns (gmailapi.Markets) {
+    rpc MarketSearch (gmailapi.ClientSentimentRequest) returns (gmailapi.MarketSearchResponse) {
         option (google.api.http) = {
             get: "/v1/igapi/marketsearch/{marketId}"
         };
