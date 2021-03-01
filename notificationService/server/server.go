@@ -199,7 +199,7 @@ func (s *server) GetConfirmationDetails(ctx context.Context, in *pb.OTCOrderResp
 	return &confResp, nil
 }
 
-func (s *server) MarketSearch(ctx context.Context, in *pb.ClientSentimentRequest) (*pb.Markets, error) {
+func (s *server) MarketSearch(ctx context.Context, in *pb.ClientSentimentRequest) (*pb.MarketSearchResponse, error) {
 	httpTimeout := time.Duration(15 * time.Second)
 	ig := igmarkets.New(igmarkets.DemoAPIURL, "1ee808908ed01577d3ab2b19ef493d0f80e24612", "XXXK3", "wiqramdemo", "DemoPWD123", httpTimeout)
 	if err := ig.Login(); err != nil {
@@ -210,12 +210,18 @@ func (s *server) MarketSearch(ctx context.Context, in *pb.ClientSentimentRequest
 		log.Println("Api: PullMail", "failed to pull any emails from gmail subscription topic", err.Error())
 		return nil, err
 	}
+
+	marketData := pb.MarketData{}
+
 	for _, n := range mSresp.Markets {
+		marketData.Expiry = n.Expiry
+
 		fmt.Printf("\nthis is what we get back from calling new igmarkets EPC-- ", n.Epic)
 		fmt.Printf("\nthis is what we get back from calling new igmarkets EPC-- ", n.Expiry)
 		fmt.Printf("\nthis is what we get back from calling new igmarkets EPC-- ", n.InstrumentName)
 	}
-	return mSresp, nil
+	marketSearchResponse := pb.MarketSearchResponse{MarketData: nil}
+	return &marketSearchResponse, nil
 }
 
 // getClientSentiment subscribes to the mailbox with specific label id
@@ -265,7 +271,7 @@ func (s *server) OpenLightStreamerSubscription(in *pb.LightStreamerSubRequest, s
 
 type M map[string]interface{} // just an alias
 
-func applyMap(u *igmarkets.OTCOrderRequest, m M) M {
+func applyMapOTCOrderRequest(u *igmarkets.OTCOrderRequest, m M) M {
 	t := reflect.TypeOf(u).Elem()
 	o := make(M)
 	for i := 0; i < t.NumField(); i++ {

@@ -17,6 +17,14 @@ grpc_tools_node_protoc \
 #cp protos/uibackend/uibackend.proto userInterface/proto/
 cp protos/uibackend/uibackend.proto uiBackend/proto/
 
+cp protos/gmailapi/gmailapi.proto notificationService/proto/
+
+cp protos/gmailapi/gmailapi.proto apiService/proto/
+cp protos/api/api.proto apiService/proto/
+cp protos/user/user.proto apiService/proto/
+cp protos/uibackend/uibackend.proto apiService/proto/
+cp protos/igapi/igapi.proto apiService/proto/
+
 # Build the user service protos for Node
 grpc_tools_node_protoc \
     --js_out=import_style=commonjs,binary:userService/proto/ \

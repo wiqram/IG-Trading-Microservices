@@ -117,7 +117,7 @@
           "200": {
             "description": "A successful response.",
             "schema": {
-              "$ref": "#/definitions/gmailapiMarkets"
+              "$ref": "#/definitions/gmailapiMarketSearchResponse"
             }
           },
           "default": {
@@ -1233,7 +1233,7 @@
       },
       "title": "MarketData - Subset of OTCWorkingOrder"
     },
-    "gmailapiMarkets": {
+    "gmailapiMarketSearchResponse": {
       "type": "object",
       "properties": {
         "marketData": {

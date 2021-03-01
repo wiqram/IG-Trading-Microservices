@@ -11,7 +11,6 @@ require (
 	github.com/lfritz/env v1.0.0
 	github.com/sirupsen/logrus v1.8.0
 	github.com/sklinkert/igmarkets v0.0.0-20201201203507-792d2e867cd3
-	github.com/wiqram/IG-Trading-Microservices/protos v0.0.0-20210211225349-c7d0086f63b0
 	go.mongodb.org/mongo-driver v1.4.6
 	golang.org/x/net v0.0.0-20210226101413-39120d07d75e
 	golang.org/x/oauth2 v0.0.0-20210220000619-9bb904979d93

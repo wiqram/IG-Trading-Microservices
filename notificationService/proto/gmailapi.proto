@@ -1,0 +1,143 @@
+syntax = "proto3";
+
+package gmailapi;
+
+option go_package = "github.com/wiqram/IG-Trading-Microservices/protos/gmailapi";
+
+service GmailapiSvc {
+    rpc subscribeToMail (SubscriptionRequest) returns (SubscriptionResponse);
+    rpc openOTCOrder (OTCOrderRequest) returns (OTCOrderResponse);
+    rpc getConfirmationDetails (OTCOrderResponse) returns (ConfirmationResponse);
+    rpc getClientSentiment (ClientSentimentRequest) returns (ClientSentimentResponse);
+    rpc openLightStreamerSubscription (LightStreamerSubRequest) returns (stream LightStreamerSubResponse);
+    rpc marketSearch (ClientSentimentRequest) returns (MarketSearchResponse);
+}
+
+//The request containing any user identifier, the labelname to monitor and the topicname to subscribe to
+message SubscriptionRequest {
+    string email_id = 1;
+    string labelName = 2;
+    string topicName = 3;
+    int32 duration = 4;
+}
+
+//response containing transId and historyid of gmail watch response
+message SubscriptionResponse {
+    string transactionId = 1;
+    string historyId = 2;
+}
+
+// OTCOrderRequest - request struct for placing orders
+message OTCOrderRequest {
+    string epic = 1;
+    string level = 2;
+    bool forceOpen = 3;
+    string orderType = 4;
+    string currencyCode = 5;
+    string direction = 6;// "BUY" or "SELL"
+    string expiry = 7;
+    float size = 8;
+    string stopDistance = 9;// Pips
+    string stopLevel = 10;  // Pips
+    string limitDistance = 11;// Pips
+    string limitLevel = 12;  // Pips
+    string quoteId = 13;
+    string timeInForce = 14; // "EXECUTE_AND_ELIMINATE" or "FILL_OR_KILL"
+    bool trailingStop = 15;
+    string trailingStopIncrement = 16;
+    bool guaranteedStop = 17;
+    string dealReference = 19;
+}
+
+message OTCOrderResponse {
+    string dealRef = 1;
+}
+
+// OTCDealConfirmation - Deal confirmation
+message ConfirmationResponse {
+    string dealStatus = 2; // "ACCEPTED"
+    float profit = 3;
+    string profitCurrency = 4;
+    string status = 5; // "OPEN"
+    string reason = 6;
+    float level = 7; // Buy price
+}
+
+// PositionsResponse - Response from positions endpoint
+message PositionsResponse {
+    repeated Positions positions = 1;
+    }
+
+// Position - part of PositionsResponse
+message Positions {
+    MarketData marketData = 1;
+    Position position = 2;
+}
+// Position - part of PositionsResponse
+message Position {
+    float contractSize = 1;
+    bool controlledRisk = 2;
+    string createdDate = 3;
+    string createdDateUTC = 4;
+    string currency = 5;
+    string dealID = 6;
+    string dealReference = 7;
+    string direction = 8;
+    float level = 9;
+    float limitLevel = 10;
+    float size = 11;
+    float stopLevel = 12;
+    float trailingStep = 13;
+    float trailingStopDistance = 14;
+}
+
+// Markets - Response from positions endpoint
+message MarketSearchResponse {
+    repeated MarketData marketData = 1;
+}
+
+// MarketData - Subset of OTCWorkingOrder
+message MarketData {
+    float bid = 1;
+    int64 delayTime = 2;
+    string epic = 3;
+    string exchangeId = 4;
+    string expiry = 5;
+    float high = 6;
+    string instrumentName = 7;
+    string instrumentType = 8;
+    float lotSize = 9;
+    float low = 10;
+    string marketStatus = 11;
+    float netChange = 12;
+    float offer = 13;
+    float percentageChange = 14;
+    int32 scalingFactor = 15;
+    bool streamingPricesAvailable = 16;
+    string updateTime = 17;
+    string updateTimeUTC = 18;
+}
+
+// ClientSentimentRequest - Response for client sentiment
+message ClientSentimentRequest {
+    string marketId = 1;
+}
+
+// ClientSentimentResponse - Response for client sentiment
+message ClientSentimentResponse {
+    float longPositionPercentage = 1;
+    float shortPositionPercentage = 2;
+}
+
+// LightStreamerSubRequest - Response for client sentiment
+message LightStreamerSubRequest {
+    string marketId = 1;
+}
+
+// LightStreamerSubResponse - Response for client sentiment
+message LightStreamerSubResponse {
+    string marketId = 1;
+    int32 time = 2;
+    float bid = 3;
+    float ask = 4;
+}

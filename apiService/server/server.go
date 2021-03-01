@@ -179,7 +179,7 @@ func (s *Server) GetClientSentiment(ctx context.Context, in *gmailapi.ClientSent
 }
 
 // MarketSearch Open Trade using UIbackend Trade Action
-func (s *Server) MarketSearch(ctx context.Context, in *gmailapi.ClientSentimentRequest) (*gmailapi.Markets, error) {
+func (s *Server) MarketSearch(ctx context.Context, in *gmailapi.ClientSentimentRequest) (*gmailapi.MarketSearchResponse, error) {
 	return s.gmailapiSvcClient.MarketSearch(ctx, in)
 }
 
