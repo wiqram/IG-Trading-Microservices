@@ -10,7 +10,7 @@ require (
 	github.com/lfritz/env v1.0.0
 	github.com/sirupsen/logrus v1.8.0
 	github.com/sklinkert/igmarkets v0.0.0-20201201203507-792d2e867cd3
-	github.com/wiqram/IG-Trading-Microservices/protos v0.0.0-20210212182526-6798af211807
+	github.com/wiqram/IG-Trading-Microservices/protos v0.0.0-20210212182526-6798af211807 // indirect
 	go.mongodb.org/mongo-driver v1.4.6
 	golang.org/x/net v0.0.0-20210226172049-e18ecbb05110
 	golang.org/x/oauth2 v0.0.0-20210220000619-9bb904979d93
