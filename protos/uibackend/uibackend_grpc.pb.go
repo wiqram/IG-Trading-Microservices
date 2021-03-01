@@ -11,6 +11,7 @@ import (
 
 // This is a compile-time assertion to ensure that this generated file
 // is compatible with the grpc package it is being compiled against.
+// Requires gRPC-Go v1.32.0 or later.
 const _ = grpc.SupportPackageIsVersion7
 
 // UibackendSvcClient is the client API for UibackendSvc service.
@@ -76,7 +77,7 @@ type UnsafeUibackendSvcServer interface {
 }
 
 func RegisterUibackendSvcServer(s grpc.ServiceRegistrar, srv UibackendSvcServer) {
-	s.RegisterService(&_UibackendSvc_serviceDesc, srv)
+	s.RegisterService(&UibackendSvc_ServiceDesc, srv)
 }
 
 func _UibackendSvc_GetProducts_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
@@ -115,7 +116,10 @@ func _UibackendSvc_GetTransactions_Handler(srv interface{}, ctx context.Context,
 	return interceptor(ctx, in, info, handler)
 }
 
-var _UibackendSvc_serviceDesc = grpc.ServiceDesc{
+// UibackendSvc_ServiceDesc is the grpc.ServiceDesc for UibackendSvc service.
+// It's only intended for direct use with grpc.RegisterService,
+// and not to be introspected or modified (even as a copy)
+var UibackendSvc_ServiceDesc = grpc.ServiceDesc{
 	ServiceName: "demo_uibackend.UibackendSvc",
 	HandlerType: (*UibackendSvcServer)(nil),
 	Methods: []grpc.MethodDesc{

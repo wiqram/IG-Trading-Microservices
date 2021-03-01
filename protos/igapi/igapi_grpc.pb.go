@@ -11,6 +11,7 @@ import (
 
 // This is a compile-time assertion to ensure that this generated file
 // is compatible with the grpc package it is being compiled against.
+// Requires gRPC-Go v1.32.0 or later.
 const _ = grpc.SupportPackageIsVersion7
 
 // IgSvcClient is the client API for IgSvc service.
@@ -109,7 +110,7 @@ func (c *igSvcClient) GetClientSentiment(ctx context.Context, in *ClientSentimen
 }
 
 func (c *igSvcClient) OpenLightStreamerSubscription(ctx context.Context, in *LightStreamerSubRequest, opts ...grpc.CallOption) (IgSvc_OpenLightStreamerSubscriptionClient, error) {
-	stream, err := c.cc.NewStream(ctx, &_IgSvc_serviceDesc.Streams[0], "/demo_igapi.IgSvc/openLightStreamerSubscription", opts...)
+	stream, err := c.cc.NewStream(ctx, &IgSvc_ServiceDesc.Streams[0], "/demo_igapi.IgSvc/openLightStreamerSubscription", opts...)
 	if err != nil {
 		return nil, err
 	}
@@ -197,7 +198,7 @@ type UnsafeIgSvcServer interface {
 }
 
 func RegisterIgSvcServer(s grpc.ServiceRegistrar, srv IgSvcServer) {
-	s.RegisterService(&_IgSvc_serviceDesc, srv)
+	s.RegisterService(&IgSvc_ServiceDesc, srv)
 }
 
 func _IgSvc_TradeAction_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
@@ -365,7 +366,10 @@ func (x *igSvcOpenLightStreamerSubscriptionServer) Send(m *LightStreamerSubRespo
 	return x.ServerStream.SendMsg(m)
 }
 
-var _IgSvc_serviceDesc = grpc.ServiceDesc{
+// IgSvc_ServiceDesc is the grpc.ServiceDesc for IgSvc service.
+// It's only intended for direct use with grpc.RegisterService,
+// and not to be introspected or modified (even as a copy)
+var IgSvc_ServiceDesc = grpc.ServiceDesc{
 	ServiceName: "demo_igapi.IgSvc",
 	HandlerType: (*IgSvcServer)(nil),
 	Methods: []grpc.MethodDesc{

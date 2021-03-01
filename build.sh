@@ -79,7 +79,8 @@ packs=(
 # shellcheck disable=SC2068
 for d in ${packs[@]} ; do
     echo "Compiling $d";
-    protoc -I . -I$GOPATH/src/github.com/grpc-ecosystem/grpc-gateway/third_party/googleapis \
+#    protoc -I . -I$GOPATH/src/github.com/grpc-ecosystem/grpc-gateway/third_party/googleapis \
+protoc -I . -I./protos/google/api \
             -I protos \
             --go_out=. --go_opt=paths=source_relative \
             --go-grpc_out=. --go-grpc_opt=paths=source_relative \
@@ -87,7 +88,8 @@ for d in ${packs[@]} ; do
 done
 
 # Generate api definition with GRPC Gateway
-protoc -I . -I$GOPATH/src/github.com/grpc-ecosystem/grpc-gateway/third_party/googleapis \
+#protoc -I . -I$GOPATH/src/github.com/grpc-ecosystem/grpc-gateway/third_party/googleapis \
+protoc -I . -I./protos/google/api \
     -I protos \
     --grpc-gateway_out . \
     --grpc-gateway_opt logtostderr=true \
@@ -95,7 +97,8 @@ protoc -I . -I$GOPATH/src/github.com/grpc-ecosystem/grpc-gateway/third_party/goo
     protos/api/api.proto
 
 # Genrate swagger docs with GRPC Gateway
-protoc -I . -I . -I$GOPATH/src/github.com/grpc-ecosystem/grpc-gateway/third_party/googleapis \
+#protoc -I . -I . -I$GOPATH/src/github.com/grpc-ecosystem/grpc-gateway/third_party/googleapis \
+protoc -I . -I./protos/google/api \
     -I protos \
     --openapiv2_out . \
     --openapiv2_opt logtostderr=true \
