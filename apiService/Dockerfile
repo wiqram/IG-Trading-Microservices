@@ -12,6 +12,8 @@ WORKDIR ${SRC_DIR}
 # Copy apps scource code to the image
 COPY . ${SRC_DIR}
 
+#private github repo hence need to add it properly so that latest commits can be fetched
+
 # Build App
 RUN ./build.sh
 
