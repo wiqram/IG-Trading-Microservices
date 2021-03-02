@@ -125,8 +125,9 @@ message ClientSentimentRequest {
 
 // ClientSentimentResponse - Response for client sentiment
 message ClientSentimentResponse {
-    float longPositionPercentage = 1;
-    float shortPositionPercentage = 2;
+    string marketId = 1;
+    float longPositionPercentage = 2;
+    float shortPositionPercentage = 3;
 }
 
 // LightStreamerSubRequest - Response for client sentiment
