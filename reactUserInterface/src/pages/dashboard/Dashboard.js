@@ -1,6 +1,6 @@
-import React, { useEffect } from 'react';
+import React, {useEffect, useState} from 'react';
 import cx from 'classnames';
-import PropTypes from 'prop-types';
+import PropTypes, {bool} from 'prop-types';
 import { Link } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import {
@@ -25,8 +25,7 @@ import { mock } from './mock'
 import Widget from '../../components/Widget';
 
 import { fetchPosts } from '../../actions/posts';
-import { fetchTrades } from '../../actions/tradeStatistics';
-import { fetchSentiment } from '../../actions/tradeStatistics';
+import { fetchTrades, fetchSentiment, marketSearch } from '../../actions/tradeStatistics';
 import s from './Dashboard.module.scss';
 
 import withStyles from "@material-ui/core/styles/withStyles";
@@ -50,51 +49,87 @@ import CardHeader from "../../components/Card/CardHeader";
 import CardIcon from "../../components/Card/CardIcon";
 import CardFooter from "../../components/Card/CardFooter";
 import Danger from "../../components/Typography/Danger";
+import Select from 'react-select'
 import dashboardStyle from "../../assets/jss/material-dashboard-react/views/dashboardStyle";
 
-
-
 const Dashboard = () => {
+// call dispatch for actions
+  const dispatch = useDispatch();
+  const [selectOptions, setSelectOptions] = useState([]);
+  const [id, setId] = useState("");
+  const [name, setName] = useState("");
+  const [classes, setClasses] = useState({});
+
 // set state for the props
   const useDashboard = useSelector(state => ({
     isFetching: state.posts.isFetching,
     posts: state.posts.posts,
-    classes: PropTypes.object.isRequired,
     trades: state.tradeStatistics.trades,
     markets: state.tradeStatistics.markets,
+    marketSearchNames: state.tradeStatistics.marketSearchNames,
   }));
 
-// call dispatch for actions
-  const dispatch = useDispatch();
+
 
   // call reducer action now
   useEffect(() => {
     dispatch(fetchPosts());
     dispatch(fetchTrades());
+    dispatch(marketSearch("US500"));
+    populateMarketSearchNames();
   }, []);
 
 
   // extract products list and others
-  const { posts, trades, isFetching, classes } = useDashboard;
-  const [searchTerm, setSearchTerm] = React.useState("");
+  const { posts, trades, isFetching, markets, marketSearchNames} = useDashboard;
 
     const formatDate = (str) => {
         return str.replace(/,.*$/,"");
     };
 
-    const toggleDropdown = () => {
+    /*const toggleDropdown = () => {
     this.setState(prevState => ({
       isDropdownOpened: !prevState.isDropdownOpened,
     }));
+  };*/
+  const handleChange = (e) => {
+    setId(e.value);
+    setName(e.label);
+    dispatch(fetchSentiment(e.label));
+  }
+
+  const populateMarketSearchNames = () => {
+    let arrayLength = markets.length;
+    console.log("this is the market length --- ",markets.length);
+    const options = [{
+      "value" : "US500",
+      "label" : "US500"
+    }];
+    for (let i = 0; i < arrayLength; i++) {
+      console.log("this is the market EPIC --- ",markets[i].epic);
+      let options1 = {
+        "value" : markets[i].epic,
+        "label" : markets[i].instrumentName
+      };
+      options.push(options1)
+      //Do something
+    }
+
+    setSelectOptions(options);
   };
 
-  const onChangeHandler = (e) => {
-    console.log("inside search term");
+  const searchMarkets = (e) => {
+    console.log("inside search markets - search term is - ", e.target.value);
     e.preventDefault();
+    console.log("before calling dispath length of markets", markets.length);
     dispatch(marketSearch(e.target.value));
+    console.log("after calling dispath length of markets", markets.length);
+  };
+
+  const searchSentiment = (e) => {
+    console.log("inside search sentiment - search term is - ", e.target.value);
+    e.preventDefault();
     dispatch(fetchSentiment(e.target.value));
-    console.log("this is searchterm", e.target.value);
-    setSearchTerm(e.target.value);
   };
 
 
@@ -114,16 +149,14 @@ const Dashboard = () => {
                     <Icon>add_circle</Icon>
                   </CardIcon>
                   <NavItem>
-                    <InputGroup>
-                      <Input placeholder="Search for..." />
-                      <InputGroupAddon addonType="prepend" className={classes.cardCategory}>
-                        <input className="fa fa-search" onChange={e => onChangeHandler(e)} value={searchTerm}/>
-                      </InputGroupAddon>
-                    </InputGroup>
+                    <div>
+                      <Select options={selectOptions} onChange={e => handleChange(e)}/>
+                    </div>
                   </NavItem>
                   <p className={classes.cardCategory}>Active Trades</p>
                   <h3 className={classes.cardTitle}>
-                    <Link to="/app/posts">{trades.longPositionPercentage}</Link>
+                    {trades.longPositionPercentage}
+                    {trades.shortPositionPercentage}
                   </h3>
                 </CardHeader>
                 <CardFooter stats>
@@ -276,6 +309,7 @@ Dashboard.propTypes = {
   posts: PropTypes.any,
   trades: PropTypes.any,
   markets: PropTypes.any,
+  marketSearchNames: PropTypes.any,
   isFetching: PropTypes.bool,
   classes: PropTypes.object.isRequired,
 };

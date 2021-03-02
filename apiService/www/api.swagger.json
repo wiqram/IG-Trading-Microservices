@@ -1106,6 +1106,9 @@
     "gmailapiClientSentimentResponse": {
       "type": "object",
       "properties": {
+        "marketId": {
+          "type": "string"
+        },
         "longPositionPercentage": {
           "type": "number",
           "format": "float"

@@ -3,9 +3,9 @@ import {
   FETCH_ALL_TRADES_REQUEST,
   FETCH_ALL_TRADES_SUCCESS,
   FETCH_ALL_TRADES_FAILURE,
-    FETCH_MARKETSEARCH_FAILURE,
-    FETCH_MARKETSEARCH_REQUEST,
-    FETCH_MARKETSEARCH_SUCCESS
+  FETCH_MARKETSEARCH_FAILURE,
+  FETCH_MARKETSEARCH_REQUEST,
+  FETCH_MARKETSEARCH_SUCCESS
 } from '../actions/tradeStatistics';
 
 export default function tradeStatistics(
@@ -13,8 +13,9 @@ export default function tradeStatistics(
     isFetching: false,
     trades:{},
     searchTerm:"",
-    markets:{},
-  },
+    markets: {},
+    marketSearchNames:[],
+    },
   action,
 ) {
   switch (action.type) {

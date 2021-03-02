@@ -502,7 +502,7 @@ func (ig *IGMarkets) Login() error {
 	}
 
 	igResponseInterface, err := ig.doRequestWithoutOAuth(req, 3, session{})
-	fmt.Printf("this is inside igmarkets after request to create sesssion", req.RemoteAddr)
+	//fmt.Printf("this is inside igmarkets after request to create sesssion", req.RemoteAddr)
 	if err != nil {
 		return err
 	}

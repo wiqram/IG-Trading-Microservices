@@ -207,20 +207,25 @@ func (s *server) MarketSearch(ctx context.Context, in *pb.ClientSentimentRequest
 	}
 	mSresp, err := ig.MarketSearch(in.MarketId)
 	if err != nil {
-		log.Println("Api: PullMail", "failed to pull any emails from gmail subscription topic", err.Error())
+		log.Println("Error while logging into IG Markets", err.Error())
 		return nil, err
 	}
 
-	marketData := pb.MarketData{}
-
+	marketSearchResponse := pb.MarketSearchResponse{}
 	for _, n := range mSresp.Markets {
-		marketData.Expiry = n.Expiry
-
-		fmt.Printf("\nthis is what we get back from calling new igmarkets EPC-- ", n.Epic)
-		fmt.Printf("\nthis is what we get back from calling new igmarkets EPC-- ", n.Expiry)
-		fmt.Printf("\nthis is what we get back from calling new igmarkets EPC-- ", n.InstrumentName)
+		a := pb.MarketData{
+			Expiry:         n.Expiry,
+			InstrumentName: n.InstrumentName,
+			Epic:           n.Epic,
+			ExchangeId:     n.ExchangeID,
+			InstrumentType: n.InstrumentType,
+			UpdateTimeUTC:  n.UpdateTimeUTC,
+		}
+		marketSearchResponse.MarketData = append(marketSearchResponse.MarketData, &a)
+		/*		fmt.Printf("\nthis is what we get back from calling new igmarkets EPC-- ", n.Epic)
+				fmt.Printf("\nthis is what we get back from calling new igmarkets EPC-- ", n.InstrumentType)
+				fmt.Printf("\nthis is what we get back from calling new igmarkets EPC-- ", n.InstrumentName)*/
 	}
-	marketSearchResponse := pb.MarketSearchResponse{MarketData: nil}
 	return &marketSearchResponse, nil
 }
 
@@ -238,9 +243,15 @@ func (s *server) GetClientSentiment(ctx context.Context, in *pb.ClientSentimentR
 		return nil, err
 	}
 	cSResp := pb.ClientSentimentResponse{
+		MarketId:                in.MarketId,
 		LongPositionPercentage:  float32(resp.LongPositionPercentage),
 		ShortPositionPercentage: float32(resp.ShortPositionPercentage),
 	}
+	/*	log.Print("", cSResp.ShortPositionPercentage)
+		log.Print("", cSResp.LongPositionPercentage)*/
+	/*cSResp := pb.ClientSentimentResponse{}
+	applyMap(resp, cSResp)*/
+
 	return &cSResp, nil
 }
 
@@ -271,9 +282,8 @@ func (s *server) OpenLightStreamerSubscription(in *pb.LightStreamerSubRequest, s
 
 type M map[string]interface{} // just an alias
 
-func applyMapOTCOrderRequest(u *igmarkets.OTCOrderRequest, m M) M {
+/*func applyMapOTCOrderRequest(s interface{}, d interface{}) interface{} {
 	t := reflect.TypeOf(u).Elem()
-	o := make(M)
 	for i := 0; i < t.NumField(); i++ {
 		f := t.FieldByIndex([]int{i})
 		// skip unexported fields
@@ -285,7 +295,7 @@ func applyMapOTCOrderRequest(u *igmarkets.OTCOrderRequest, m M) M {
 			o[k] = x
 		}
 	}
-	return o
+	return s
 }
 
 func mapFields(x *pb.OTCOrderRequest) M {
@@ -301,4 +311,62 @@ func mapFields(x *pb.OTCOrderRequest) M {
 		o[f.Name] = v.FieldByIndex([]int{i}).Interface()
 	}
 	return o
+}*/
+
+func applyMap(s interface{}, d interface{}) interface{} {
+	typeOfSource := reflect.TypeOf(s).Elem()
+	typeOfDestination := reflect.TypeOf(d).Elem()
+	valueOfSource := reflect.ValueOf(s).Elem()
+	valueOfDestination := reflect.ValueOf(d).Elem()
+	//	fmt.Println("type of source -- valueOf ", valueOfSource)
+	//	fmt.Println("type of source -- NumField ", typeOfSource.NumField())
+	//	fmt.Println("type of destination -- valueOf ", valueOfDestination)
+	for destinationCount := 0; destinationCount < typeOfDestination.NumField(); destinationCount++ {
+		uf := typeOfDestination.FieldByIndex([]int{destinationCount})
+		fmt.Println("type of source -- ----------- ", valueOfDestination.FieldByIndex([]int{destinationCount}).Interface())
+		//fmt.Println("in for loop -- type ", valueOfDestination.FieldByName(uf.Name))
+		// skip unexported fields
+		if uf.PkgPath != "" {
+			continue
+		}
+
+		for sourceCount := 0; sourceCount < typeOfSource.NumField(); sourceCount++ {
+			//			fmt.Println("type of source -- sub for loop ------ ", valueOfSource.FieldByIndex([]int{sourceCount}).Interface())
+
+			tf := typeOfSource.FieldByIndex([]int{sourceCount})
+			//Main condition to match the source attribute name to destination attribute name Also need to match type in future
+			if tf.Name == uf.Name {
+				//names have now matched. so need to transfer the value
+				fmt.Println("CONDITION OF SAME NAME MET")
+				fmt.Println("VALUE OF SOURCE", valueOfSource.FieldByIndex([]int{sourceCount}).Interface())
+				fmt.Println("KIND OF SOURCE", valueOfSource.FieldByIndex([]int{sourceCount}).Kind())
+				switch valueOfSource.FieldByIndex([]int{sourceCount}).Kind() {
+				case reflect.Int, reflect.Int8, reflect.Int16, reflect.Int32, reflect.Int64:
+				case reflect.Float32:
+					//value := valueOfSource.FieldByIndex([]int{sourceCount}).Interface()
+					if valueOfDestination.FieldByIndex([]int{destinationCount}).Kind() == reflect.Float32 {
+						valueOfDestination.Elem().FieldByName(tf.Name).Set(valueOfSource.FieldByIndex([]int{sourceCount}))
+					}
+					if valueOfDestination.FieldByIndex([]int{destinationCount}).Kind() == reflect.Float64 {
+						value := valueOfSource.FieldByIndex([]int{sourceCount})
+						//yValue := value.Interface().(float32)
+						valueOfDestination.Elem().FieldByName(tf.Name).Set(value)
+					}
+
+				case reflect.String:
+					//m[typeField.Name] = valueOfSource.String()
+					// etc...
+				}
+				//valueOfDestination.FieldByIndex([]int{destinationCount}).Interface() = valueOfSource.FieldByIndex([]int{sourceCount}).Interface()
+				//valueOfDestination.FieldByIndex([]int{destinationCount}) = valueOfSource.FieldByIndex([]int{sourceCount})
+				//sf := valueOfDestination.FieldByName(uf.Name)
+				//sf = valueOfSource.FieldByIndex([]int{sourceCount})
+				//fmt.Println("WHAT IS THIS?", sf.Elem())
+				valueOfDestination.FieldByIndex([]int{destinationCount}).Set(valueOfSource.FieldByIndex([]int{sourceCount}))
+				fmt.Println("VALUE OF DESTINATION AFTER MAPPING", valueOfDestination.FieldByIndex([]int{destinationCount}))
+			}
+			//				fmt.Println("in sub for loop -- type ", tf.Type)
+		}
+	}
+	return d
 }

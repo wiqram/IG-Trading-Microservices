@@ -17,7 +17,7 @@ fi
 
 export GO111MODULE=on
 
-#go clean --modcache
+go clean --modcache
 #go get github.com/wiqram/IG-Trading-Microservices/protos@main
 go mod vendor
 go mod verify
