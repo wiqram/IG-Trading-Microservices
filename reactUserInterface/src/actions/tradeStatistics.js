@@ -24,7 +24,7 @@ function marketSearchError(message) {
 }
 //Get all related market search strings from the broker
 function marketSearchSuccess(marketData, marketSearchNames) {
-  console.log("this is the markets inside marketseearch success", marketData.length)
+ /* console.log("this is the markets inside marketseearch success", marketData.length)*/
   return {
     type: FETCH_MARKETSEARCH_SUCCESS,
     isFetching: false,
@@ -41,8 +41,8 @@ function requestFetchTrades() {
 }
 
 function fetchTradesSuccess(trades) {
-  console.log("this is the trades inside fetch success", trades.longPositionPercentage);
-  console.log("this is the trades inside fetch success", trades.shortPositionPercentage);
+/*  console.log("this is the trades inside fetch success", trades.longPositionPercentage);
+  console.log("this is the trades inside fetch success", trades.shortPositionPercentage);*/
   return {
     type: FETCH_ALL_TRADES_SUCCESS,
     isFetching: false,
@@ -108,7 +108,7 @@ export const fetchSentiment = (searchTerm) => {
             dispatch(fetchTradesError(post.message));
             return Promise.reject(post);
           }
-          console.log(">>>>>>>>>>>>>>we are in service API for trades longPositionPercentage", post);
+          /*console.log(">>>>>>>>>>>>>>we are in service API for trades longPositionPercentage", post);*/
           dispatch(fetchTradesSuccess(post));
           return Promise.resolve(post);
         })
@@ -141,11 +141,10 @@ export function marketSearch(searchTerm) {
           //console.log(">>>>>>>>>>>>>>we are in service API for trades longPositionPercentage", response.data);
           let marketData = marketSearchResponse.marketData;
           let marketSearchNames = [];
-          console.log(marketData.length)
           if (marketData.length > 0) {
             let i;
             for (i = 0; i < marketData.length; i++) {
-              console.log("-----instrumentName-----", marketData[i].instrumentName);
+              /*console.log("-----instrumentName-----", marketData[i].instrumentName);*/
               marketSearchNames.push(marketData[i].instrumentName);
             }
           }

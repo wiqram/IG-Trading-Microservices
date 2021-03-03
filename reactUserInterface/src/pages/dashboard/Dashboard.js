@@ -58,12 +58,13 @@ const Dashboard = () => {
   const [selectOptions, setSelectOptions] = useState([]);
   const [id, setId] = useState("");
   const [name, setName] = useState("");
-  const [classes, setClasses] = useState({});
+/*  const [classes, setClasses] = useState({});*/
 
 // set state for the props
   const useDashboard = useSelector(state => ({
     isFetching: state.posts.isFetching,
     posts: state.posts.posts,
+    classes: PropTypes.any.isRequired,
     trades: state.tradeStatistics.trades,
     markets: state.tradeStatistics.markets,
     marketSearchNames: state.tradeStatistics.marketSearchNames,
@@ -76,12 +77,11 @@ const Dashboard = () => {
     dispatch(fetchPosts());
     dispatch(fetchTrades());
     dispatch(marketSearch("US500"));
-    populateMarketSearchNames();
-  }, []);
+    }, []);
 
 
   // extract products list and others
-  const { posts, trades, isFetching, markets, marketSearchNames} = useDashboard;
+  const { posts, trades, isFetching, markets, marketSearchNames, classes} = useDashboard;
 
     const formatDate = (str) => {
         return str.replace(/,.*$/,"");
@@ -93,6 +93,8 @@ const Dashboard = () => {
     }));
   };*/
   const handleChange = (e) => {
+    console.log("this is inside handlechange  value--- ",e.value);
+    console.log("this is inside handlechange  label--- ",e.label);
     setId(e.value);
     setName(e.label);
     dispatch(fetchSentiment(e.label));
@@ -140,7 +142,6 @@ const Dashboard = () => {
           <BreadcrumbItem active>Dashboard</BreadcrumbItem>
         </Breadcrumb>
         <h1 className="mb-lg">Dashboard</h1>
-
           <GridContainer>
             <GridItem xs={12} sm={6} md={3}>
               <Card>
@@ -149,15 +150,11 @@ const Dashboard = () => {
                     <Icon>add_circle</Icon>
                   </CardIcon>
                   <NavItem>
-                    <div>
                       <Select options={selectOptions} onChange={e => handleChange(e)}/>
-                    </div>
                   </NavItem>
-                  <p className={classes.cardCategory}>Active Trades</p>
-                  <h3 className={classes.cardTitle}>
-                    {trades.longPositionPercentage}
-                    {trades.shortPositionPercentage}
-                  </h3>
+                      <p className={classes.cardCategory}>Active Trades</p>
+                        <h3 className="mb-lg" color="warning">{trades.longPositionPercentage}
+                          {trades.shortPositionPercentage}</h3>
                 </CardHeader>
                 <CardFooter stats>
                   <div className={classes.stats}>
@@ -311,7 +308,7 @@ Dashboard.propTypes = {
   markets: PropTypes.any,
   marketSearchNames: PropTypes.any,
   isFetching: PropTypes.bool,
-  classes: PropTypes.object.isRequired,
+  classes: PropTypes.any.isRequired,
 };
 
 

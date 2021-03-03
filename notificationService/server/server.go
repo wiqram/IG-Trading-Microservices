@@ -247,8 +247,6 @@ func (s *server) GetClientSentiment(ctx context.Context, in *pb.ClientSentimentR
 		LongPositionPercentage:  float32(resp.LongPositionPercentage),
 		ShortPositionPercentage: float32(resp.ShortPositionPercentage),
 	}
-	/*	log.Print("", cSResp.ShortPositionPercentage)
-		log.Print("", cSResp.LongPositionPercentage)*/
 	/*cSResp := pb.ClientSentimentResponse{}
 	applyMap(resp, cSResp)*/
 
