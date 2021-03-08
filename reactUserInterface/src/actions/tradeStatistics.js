@@ -46,7 +46,7 @@ function fetchTradesSuccess(trades) {
   return {
     type: FETCH_ALL_TRADES_SUCCESS,
     isFetching: false,
-    trades: trades,
+    tradeSentiment: trades,
   };
 }
 
@@ -138,14 +138,17 @@ export function marketSearch(searchTerm) {
             dispatch(marketSearchError(marketSearchResponse.message));
             return Promise.reject(marketSearchResponse);
           }
-          //console.log(">>>>>>>>>>>>>>we are in service API for trades longPositionPercentage", response.data);
+          /*console.log(">>>>>>>>>>>>>>we are in service API for trades marketSearchResponse", marketSearchResponse);*/
           let marketData = marketSearchResponse.marketData;
           let marketSearchNames = [];
           if (marketData.length > 0) {
             let i;
             for (i = 0; i < marketData.length; i++) {
-              /*console.log("-----instrumentName-----", marketData[i].instrumentName);*/
-              marketSearchNames.push(marketData[i].instrumentName);
+              //console.log("-----instrumentName-----", marketData[i].instrumentName);
+                marketSearchNames.push({
+                    "value" : (marketData[i].instrumentName).replace(/ /g,''),
+                    "label" : (marketData[i].instrumentName).replace(/ /g,'')
+                });
             }
           }
           dispatch(marketSearchSuccess(marketData, marketSearchNames));

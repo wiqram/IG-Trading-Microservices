@@ -1,4 +1,4 @@
-FROM golang:1.16 AS builder
+FROM golang:latest AS builder
 
 # Set GOPATH to build Go app
 ENV GOPATH=/go

@@ -11,10 +11,10 @@ import {
 export default function tradeStatistics(
   state = {
     isFetching: false,
-    trades:{},
+    tradeSentiment:{},
     searchTerm:"",
     markets: {},
-    marketSearchNames:[],
+    marketSearchNames:{},
     },
   action,
 ) {
@@ -30,7 +30,7 @@ export default function tradeStatistics(
     case FETCH_ALL_TRADES_SUCCESS:
       return Object.assign({}, state, {
         isFetching: false,
-        trades: action.trades,
+        tradeSentiment: action.tradeSentiment,
       });
     case FETCH_ALL_TRADES_FAILURE:
       return Object.assign({}, state, {
@@ -45,6 +45,7 @@ export default function tradeStatistics(
       return Object.assign({}, state, {
         isFetching: false,
         markets: action.markets,
+        marketSearchNames: action.marketSearchNames,
       });
     case FETCH_MARKETSEARCH_FAILURE:
       return Object.assign({}, state, {

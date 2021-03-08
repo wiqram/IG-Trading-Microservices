@@ -51,6 +51,7 @@ import CardFooter from "../../components/Card/CardFooter";
 import Danger from "../../components/Typography/Danger";
 import Select from 'react-select'
 import dashboardStyle from "../../assets/jss/material-dashboard-react/views/dashboardStyle";
+import {blackColor} from "../../assets/jss/material-dashboard-react";
 
 const Dashboard = () => {
 // call dispatch for actions
@@ -64,8 +65,8 @@ const Dashboard = () => {
   const useDashboard = useSelector(state => ({
     isFetching: state.posts.isFetching,
     posts: state.posts.posts,
-    classes: PropTypes.any.isRequired,
-    trades: state.tradeStatistics.trades,
+    classes: PropTypes.object.isRequired,
+    tradeSentiment: state.tradeStatistics.tradeSentiment,
     markets: state.tradeStatistics.markets,
     marketSearchNames: state.tradeStatistics.marketSearchNames,
   }));
@@ -77,11 +78,12 @@ const Dashboard = () => {
     dispatch(fetchPosts());
     dispatch(fetchTrades());
     dispatch(marketSearch("US500"));
+    populateMarketSearchNames();
     }, []);
 
 
   // extract products list and others
-  const { posts, trades, isFetching, markets, marketSearchNames, classes} = useDashboard;
+  const { posts, tradeSentiment, isFetching, markets, marketSearchNames, classes} = useDashboard;
 
     const formatDate = (str) => {
         return str.replace(/,.*$/,"");
@@ -93,31 +95,52 @@ const Dashboard = () => {
     }));
   };*/
   const handleChange = (e) => {
-    console.log("this is inside handlechange  value--- ",e.value);
-    console.log("this is inside handlechange  label--- ",e.label);
+/*    console.log("this is inside handlechange  value--- ",e.value);
+    console.log("this is inside handlechange  label--- ",e.label);*/
     setId(e.value);
     setName(e.label);
+    dispatch(marketSearch(e.label));
     dispatch(fetchSentiment(e.label));
   }
 
   const populateMarketSearchNames = () => {
-    let arrayLength = markets.length;
+    if (!markets)
+    {
+      let arrayLength = markets.length;
+
     console.log("this is the market length --- ",markets.length);
-    const options = [{
+  const options = [{
       "value" : "US500",
       "label" : "US500"
     }];
+    /* const options1 = [{
+     "value" : "FT100",
+     "label" : "FT100"
+   }];*/
+    //options.push(options1)
     for (let i = 0; i < arrayLength; i++) {
       console.log("this is the market EPIC --- ",markets[i].epic);
-      let options1 = {
+      let options2 = {
         "value" : markets[i].epic,
         "label" : markets[i].instrumentName
       };
-      options.push(options1)
+      options.push(options2)
       //Do something
     }
 
     setSelectOptions(options);
+    }else {
+      const options = [{
+        "value" : "US500",
+        "label" : "US500"
+      }];
+      const options1 = [{
+       "value" : "FT100",
+       "label" : "FT100"
+     }];
+      options.push(options1);
+    }
+
   };
 
   const searchMarkets = (e) => {
@@ -153,8 +176,8 @@ const Dashboard = () => {
                       <Select options={selectOptions} onChange={e => handleChange(e)}/>
                   </NavItem>
                       <p className={classes.cardCategory}>Active Trades</p>
-                        <h3 className="mb-lg" color="warning">{trades.longPositionPercentage}
-                          {trades.shortPositionPercentage}</h3>
+                  <h3 className="mb-lg" color="warning">{tradeSentiment.longPositionPercentage}</h3>
+                  <h3 className="mb-lg" color="warning">  {tradeSentiment.shortPositionPercentage}</h3>
                 </CardHeader>
                 <CardFooter stats>
                   <div className={classes.stats}>
@@ -304,11 +327,11 @@ const Dashboard = () => {
 
 Dashboard.propTypes = {
   posts: PropTypes.any,
-  trades: PropTypes.any,
+  tradeSentiment: PropTypes.any,
   markets: PropTypes.any,
   marketSearchNames: PropTypes.any,
   isFetching: PropTypes.bool,
-  classes: PropTypes.any.isRequired,
+  classes: PropTypes.object.isRequired
 };
 
 
